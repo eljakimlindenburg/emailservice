@@ -18,11 +18,12 @@
 
     <modules>
         <module>emailservice-application</module>
-        <module>emailservice-db-scripts</module>
         <module>emailservice-config</module>
+        <module>emailservice-db-scripts</module>
         <module>emailservice-integration-test</module>
-        <module>emailservice-test-infrastructure</module>
         <module>emailservice-report</module>
+        <module>emailservice-test-infrastructure</module>
+        <module>emailservice-smtp-adapter</module>
     </modules>
 
     <properties>
