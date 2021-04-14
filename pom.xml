@@ -1,0 +1,453 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.3.8.RELEASE</version>
+        <relativePath/>
+    </parent>
+
+    <groupId>be.vdab.emailservice</groupId>
+    <artifactId>emailservice</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>emailservice-application</module>
+        <module>emailservice-db-scripts</module>
+        <module>emailservice-config</module>
+        <module>emailservice-integration-test</module>
+        <module>emailservice-test-infrastructure</module>
+        <module>emailservice-report</module>
+    </modules>
+
+    <properties>
+        <!-- instellingen -->
+        <java.version>11</java.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <start-class>be.vdab.emailservice.Application</start-class>
+        <maven.build.timestamp.format>yyyy-MM-dd HH:mm:ss</maven.build.timestamp.format>
+        <!--suppress UnresolvedMavenProperty -->
+        <generate-graph.dir>${maven.multiModuleProjectDirectory}/doc/graphs</generate-graph.dir>
+
+        <skipUnittests>false</skipUnittests>
+        <skipIntegrationtests>false</skipIntegrationtests>
+        <skipSql>false</skipSql>
+
+        <!-- vdab versies -->
+        <vac-team.commons.version>[2.13.0,2.13.999999999)</vac-team.commons.version>
+        <axon.version>4.4.7</axon.version>
+        <axon-vdab-library.version>4.4.7-116</axon-vdab-library.version>
+        <vdab.hermes.testcontainers.version>[1.0.0, 1.0.999999999)</vdab.hermes.testcontainers.version>
+
+        <!-- vaste versies -->
+        <oracle.version>12.2.0.1</oracle.version>
+        <spring-cloud.version>Hoxton.SR8</spring-cloud.version>
+        <awaitility.version>4.0.3</awaitility.version>
+        <micrometer.jvm.extras.version>0.2.0</micrometer.jvm.extras.version>
+        <springdoc-openapi.version>1.4.7</springdoc-openapi.version>
+        <vdab-metrics-spring-boot-starter.version>1.1.0-27</vdab-metrics-spring-boot-starter.version>
+        <opentracing.vdab.library.version>1.1.0-12</opentracing.vdab.library.version>
+
+        <!-- range versies -->
+        <assertj.version>[3.6.1,4.0)</assertj.version>
+
+        <!-- plugin versies -->
+        <sql-maven-plugin.version>1.5</sql-maven-plugin.version>
+        <wardependencychecker-maven-plugin.version>1.0.0-6</wardependencychecker-maven-plugin.version>
+        <git-commit-id-maven-plugin.version>4.0.2</git-commit-id-maven-plugin.version>
+        <flyway.version>6.5.6</flyway.version>
+        <dependency-graph-generator.version>1.0.0-10</dependency-graph-generator.version>
+        <sonar-maven-plugin.version>3.7.0.1746</sonar-maven-plugin.version>
+        <jacoco-maven-plugin.version>0.8.5</jacoco-maven-plugin.version>
+        <sonar-jacoco-listeners.version>5.14.0.18788</sonar-jacoco-listeners.version>
+
+        <!-- Sonar -->
+        <sonar.host.url>http://sonaree.vdab.be:9000</sonar.host.url>
+        <sonar.coverage.jacoco.xmlReportPaths>
+            ${basedir}/../emailservice-report/target/site/jacoco-aggregate/jacoco.xml
+        </sonar.coverage.jacoco.xmlReportPaths>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <!-- modules -->
+            <dependency>
+                <groupId>be.vdab.emailservice</groupId>
+                <artifactId>emailservice-config</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>be.vdab.emailservice</groupId>
+                <artifactId>emailservice-test-infrastructure</artifactId>
+                <version>${project.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>be.vdab.emailservice</groupId>
+                <artifactId>emailservice-db-scripts</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>be.vdab.emailservice</groupId>
+                <artifactId>emailservice-application</artifactId>
+                <classifier>classes</classifier>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>be.vdab.emailservice</groupId>
+                <artifactId>emailservice-ui</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>be.vdab.emailservice</groupId>
+                <artifactId>emailservice-integration-test</artifactId>
+                <version>${project.version}</version>
+                <scope>test</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!-- axon -->
+            <dependency>
+                <groupId>be.vdab.axon</groupId>
+                <artifactId>axon-vdab-extensie-spring-boot-starter</artifactId>
+                <version>${axon-vdab-library.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>be.vdab.axon</groupId>
+                <artifactId>axon-vdab-extensie-spring</artifactId>
+                <version>${axon-vdab-library.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.axonframework</groupId>
+                <artifactId>axon-test</artifactId>
+                <version>${axon.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.axonframework</groupId>
+                <artifactId>axon-micrometer</artifactId>
+                <version>${axon.version}</version>
+            </dependency>
+
+            <!-- logging dependencies -->
+            <dependency>
+                <groupId>be.vdab.vac-team.commons</groupId>
+                <artifactId>commons-logstash-utils-dep</artifactId>
+                <version>${vac-team.commons.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.oracle.jdbc</groupId>
+                <artifactId>ojdbc8</artifactId>
+                <version>${oracle.version}</version>
+                <scope>provided</scope>
+            </dependency>
+
+            <!-- swagger -->
+            <dependency>
+                <groupId>org.springdoc</groupId>
+                <artifactId>springdoc-openapi-ui</artifactId>
+                <version>${springdoc-openapi.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.awaitility</groupId>
+                <artifactId>awaitility</artifactId>
+                <version>${awaitility.version}</version>
+                <scope>test</scope>
+            </dependency>
+
+            <!-- testing -->
+            <dependency>
+                <groupId>org.mockito</groupId>
+                <artifactId>mockito-core</artifactId>
+                <version>${mockito.version}</version>
+            </dependency>
+
+            <!-- sonar -->
+            <dependency>
+                <groupId>org.sonarsource.java</groupId>
+                <artifactId>sonar-jacoco-listeners</artifactId>
+                <version>${sonar-jacoco-listeners.version}</version>
+                <scope>test</scope>
+            </dependency>
+
+            <!-- micrometer -->
+            <dependency>
+                <groupId>io.github.mweirauch</groupId>
+                <artifactId>micrometer-jvm-extras</artifactId>
+                <version>${micrometer.jvm.extras.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>be.vdab.monitoring</groupId>
+                <artifactId>vdab-metrics-spring-boot-starter</artifactId>
+                <version>${vdab-metrics-spring-boot-starter.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>be.vdab.opentracing</groupId>
+                <artifactId>vdab-opentracing-spring-boot-starter</artifactId>
+                <version>${opentracing.vdab.library.version}</version>
+            </dependency>
+
+            <!-- test container -->
+            <dependency>
+                <groupId>be.vdab.hermes</groupId>
+                <artifactId>hermes-testcontainers</artifactId>
+                <version>${vdab.hermes.testcontainers.version}</version>
+                <scope>test</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <dependencies>
+        <!-- testing -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.sonarsource.java</groupId>
+            <artifactId>sonar-jacoco-listeners</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <configuration>
+                        <delimiters>
+                            <delimiter>@</delimiter>
+                        </delimiters>
+                        <escapeString>\</escapeString>
+                        <useDefaultDelimiters>false</useDefaultDelimiters>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.flywaydb</groupId>
+                    <artifactId>flyway-maven-plugin</artifactId>
+                    <version>${flyway.version}</version>
+                    <configuration>
+                        <!--suppress UnresolvedMavenProperty -->
+                        <user>${flyway.username}</user>
+                        <!--suppress UnresolvedMavenProperty -->
+                        <password>${flyway.password}</password>
+                        <!--suppress UnresolvedMavenProperty -->
+                        <url>${db.url}</url>
+                        <table>SCHEMA_VERSION</table>
+                        <driver>oracle.jdbc.OracleDriver</driver>
+                        <skip>${skipSql}</skip>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <phase>test-compile</phase>
+                            <goals>
+                                <goal>migrate</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                    <dependencies>
+                        <dependency>
+                            <groupId>com.oracle.jdbc</groupId>
+                            <artifactId>ojdbc8</artifactId>
+                            <version>${oracle.version}</version>
+                        </dependency>
+                    </dependencies>
+                </plugin>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>sql-maven-plugin</artifactId>
+                    <version>${sql-maven-plugin.version}</version>
+                    <configuration>
+                        <encoding>UTF-8</encoding>
+                        <driver>oracle.jdbc.OracleDriver</driver>
+                        <url>jdbc:oracle:thin:@localhost:1521/xe</url>
+                        <username>system</username>
+                        <password>oracle</password>
+                        <delimiter>/</delimiter>
+                    </configuration>
+                    <dependencies>
+                        <dependency>
+                            <groupId>com.oracle.jdbc</groupId>
+                            <artifactId>ojdbc8</artifactId>
+                            <version>${oracle.version}</version>
+                        </dependency>
+                    </dependencies>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-jar-plugin</artifactId>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>test-jar</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <configuration>
+                        <excludes>
+                            <exclude>**/*IntegrationTest.java</exclude>
+                        </excludes>
+                        <skipTests>${skipUnittests}</skipTests>
+                        <properties>
+                            <property>
+                                <name>listener</name>
+                                <value>org.sonar.java.jacoco.JUnitListener</value>
+                            </property>
+                        </properties>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-failsafe-plugin</artifactId>
+                    <configuration>
+                        <includes>
+                            <include>**/*IntegrationTest.java</include>
+                        </includes>
+                        <skipTests>${skipIntegrationtests}</skipTests>
+                        <properties>
+                            <property>
+                                <name>listener</name>
+                                <value>org.sonar.java.jacoco.JUnitListener</value>
+                            </property>
+                        </properties>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <id>integration-test</id>
+                            <phase>integration-test</phase>
+                            <goals>
+                                <goal>integration-test</goal>
+                            </goals>
+                        </execution>
+                        <execution>
+                            <id>integration-verify</id>
+                            <phase>verify</phase>
+                            <goals>
+                                <goal>verify</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <groupId>pl.project13.maven</groupId>
+                    <artifactId>git-commit-id-plugin</artifactId>
+                    <version>${git-commit-id-maven-plugin.version}</version>
+                    <configuration>
+                        <failOnNoGitDirectory>false</failOnNoGitDirectory>
+                        <verbose>false</verbose>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>build-info</goal>
+                            </goals>
+                            <configuration>
+                                <additionalProperties>
+                                    <time.formatted>${maven.build.timestamp}</time.formatted>
+                                </additionalProperties>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-source-plugin</artifactId>
+                    <executions>
+                        <execution>
+                            <id>attach-sources</id>
+                            <phase>verify</phase>
+                            <goals>
+                                <goal>jar-no-fork</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <groupId>be.vdab.mavenplugins</groupId>
+                    <artifactId>wardependencychecker-maven-plugin</artifactId>
+                    <version>${wardependencychecker-maven-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>be.vdab.mavenplugins</groupId>
+                    <artifactId>dependency-graph-generator-maven-plugin</artifactId>
+                    <version>${dependency-graph-generator.version}</version>
+                    <extensions>true</extensions>
+                </plugin>
+                <plugin>
+                    <groupId>org.sonarsource.scanner.maven</groupId>
+                    <artifactId>sonar-maven-plugin</artifactId>
+                    <version>${sonar-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.jacoco</groupId>
+                    <artifactId>jacoco-maven-plugin</artifactId>
+                    <version>${jacoco-maven-plugin.version}</version>
+                    <executions>
+                        <execution>
+                            <id>prepare-agent</id>
+                            <goals>
+                                <goal>prepare-agent</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+
+        <plugins>
+            <plugin>
+                <artifactId>maven-war-plugin</artifactId>
+                <configuration>
+                    <attachClasses>true</attachClasses>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-failsafe-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <artifactId>maven-source-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>be.vdab.mavenplugins</groupId>
+                <artifactId>dependency-graph-generator-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+
+    <distributionManagement>
+        <repository>
+            <id>releases</id>
+            <url>http://nexus.vdab.be:8081/repository/maven-releases</url>
+        </repository>
+    </distributionManagement>
+</project>
