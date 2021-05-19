@@ -7,7 +7,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.3.8.RELEASE</version>
+        <version>2.4.5</version>
         <relativePath/>
     </parent>
 
@@ -17,13 +17,18 @@
     <packaging>pom</packaging>
 
     <modules>
+        <module>emailservice-api</module>
         <module>emailservice-application</module>
         <module>emailservice-config</module>
+        <module>emailservice-core-api</module>
         <module>emailservice-db-scripts</module>
+        <module>emailservice-digiconnect-adapter</module>
         <module>emailservice-integration-test</module>
         <module>emailservice-report</module>
-        <module>emailservice-test-infrastructure</module>
+        <module>emailservice-ringring-adapter</module>
+        <module>emailservice-sendgrid-adapter</module>
         <module>emailservice-smtp-adapter</module>
+        <module>emailservice-test-infrastructure</module>
     </modules>
 
     <properties>
@@ -32,43 +37,25 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <start-class>be.vdab.emailservice.Application</start-class>
         <maven.build.timestamp.format>yyyy-MM-dd HH:mm:ss</maven.build.timestamp.format>
-        <!--suppress UnresolvedMavenProperty -->
-        <generate-graph.dir>${maven.multiModuleProjectDirectory}/doc/graphs</generate-graph.dir>
-
         <skipUnittests>false</skipUnittests>
         <skipIntegrationtests>false</skipIntegrationtests>
         <skipSql>false</skipSql>
 
         <!-- vdab versies -->
-        <vac-team.commons.version>[2.13.0,2.13.999999999)</vac-team.commons.version>
-        <axon.version>4.4.7</axon.version>
+        <axon.version>4.4.8</axon.version>
         <axon-vdab-library.version>4.4.7-116</axon-vdab-library.version>
         <vdab.hermes.testcontainers.version>[1.0.0, 1.0.999999999)</vdab.hermes.testcontainers.version>
+        <wardependencychecker-maven-plugin.version>1.0.0-6</wardependencychecker-maven-plugin.version>
 
         <!-- vaste versies -->
-        <oracle.version>12.2.0.1</oracle.version>
         <spring-cloud.version>Hoxton.SR8</spring-cloud.version>
-        <awaitility.version>4.0.3</awaitility.version>
-        <micrometer.jvm.extras.version>0.2.0</micrometer.jvm.extras.version>
-        <springdoc-openapi.version>1.4.7</springdoc-openapi.version>
-        <vdab-metrics-spring-boot-starter.version>1.1.0-27</vdab-metrics-spring-boot-starter.version>
-        <opentracing.vdab.library.version>1.1.0-12</opentracing.vdab.library.version>
-
-        <!-- range versies -->
-        <assertj.version>[3.6.1,4.0)</assertj.version>
 
         <!-- plugin versies -->
-        <sql-maven-plugin.version>1.5</sql-maven-plugin.version>
-        <wardependencychecker-maven-plugin.version>1.0.0-6</wardependencychecker-maven-plugin.version>
-        <git-commit-id-maven-plugin.version>4.0.2</git-commit-id-maven-plugin.version>
-        <flyway.version>6.5.6</flyway.version>
-        <dependency-graph-generator.version>1.0.0-10</dependency-graph-generator.version>
-        <sonar-maven-plugin.version>3.7.0.1746</sonar-maven-plugin.version>
         <jacoco-maven-plugin.version>0.8.5</jacoco-maven-plugin.version>
         <sonar-jacoco-listeners.version>5.14.0.18788</sonar-jacoco-listeners.version>
 
         <!-- Sonar -->
-        <sonar.host.url>http://sonaree.vdab.be:9000</sonar.host.url>
+        <sonar.host.url>http://sonaree.vdab.be:9000</sonar.host.url> <!-- TODO: andere url -->
         <sonar.coverage.jacoco.xmlReportPaths>
             ${basedir}/../emailservice-report/target/site/jacoco-aggregate/jacoco.xml
         </sonar.coverage.jacoco.xmlReportPaths>
@@ -79,19 +66,15 @@
             <!-- modules -->
             <dependency>
                 <groupId>be.vdab.emailservice</groupId>
-                <artifactId>emailservice-config</artifactId>
+                <artifactId>emailservice-api</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>be.vdab.emailservice</groupId>
-                <artifactId>emailservice-test-infrastructure</artifactId>
+                <artifactId>emailservice-api</artifactId>
                 <version>${project.version}</version>
                 <scope>test</scope>
-            </dependency>
-            <dependency>
-                <groupId>be.vdab.emailservice</groupId>
-                <artifactId>emailservice-db-scripts</artifactId>
-                <version>${project.version}</version>
+                <type>test-jar</type>
             </dependency>
             <dependency>
                 <groupId>be.vdab.emailservice</groupId>
@@ -101,8 +84,37 @@
             </dependency>
             <dependency>
                 <groupId>be.vdab.emailservice</groupId>
-                <artifactId>emailservice-ui</artifactId>
+                <artifactId>emailservice-config</artifactId>
                 <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>be.vdab.emailservice</groupId>
+                <artifactId>emailservice-core-api</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>be.vdab.emailservice</groupId>
+                <artifactId>emailservice-core-api</artifactId>
+                <version>${project.version}</version>
+                <scope>test</scope>
+                <type>test-jar</type>
+            </dependency>
+            <dependency>
+                <groupId>be.vdab.emailservice</groupId>
+                <artifactId>emailservice-db-scripts</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>be.vdab.emailservice</groupId>
+                <artifactId>emailservice-digiconnect-adapter</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>be.vdab.emailservice</groupId>
+                <artifactId>emailservice-digiconnect-adapter</artifactId>
+                <version>${project.version}</version>
+                <scope>test</scope>
+                <type>test-jar</type>
             </dependency>
             <dependency>
                 <groupId>be.vdab.emailservice</groupId>
@@ -110,7 +122,55 @@
                 <version>${project.version}</version>
                 <scope>test</scope>
             </dependency>
+            <dependency>
+                <groupId>be.vdab.emailservice</groupId>
+                <artifactId>emailservice-report</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>be.vdab.emailservice</groupId>
+                <artifactId>emailservice-ringring-adapter</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>be.vdab.emailservice</groupId>
+                <artifactId>emailservice-ringring-adapter</artifactId>
+                <version>${project.version}</version>
+                <scope>test</scope>
+                <type>test-jar</type>
+            </dependency>
+            <dependency>
+                <groupId>be.vdab.emailservice</groupId>
+                <artifactId>emailservice-sendgrid-adapter</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>be.vdab.emailservice</groupId>
+                <artifactId>emailservice-sendgrid-adapter</artifactId>
+                <version>${project.version}</version>
+                <scope>test</scope>
+                <type>test-jar</type>
+            </dependency>
+            <dependency>
+                <groupId>be.vdab.emailservice</groupId>
+                <artifactId>emailservice-smtp-adapter</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>be.vdab.emailservice</groupId>
+                <artifactId>emailservice-smtp-adapter</artifactId>
+                <version>${project.version}</version>
+                <scope>test</scope>
+                <type>test-jar</type>
+            </dependency>
+            <dependency>
+                <groupId>be.vdab.emailservice</groupId>
+                <artifactId>emailservice-test-infrastructure</artifactId>
+                <version>${project.version}</version>
+                <scope>test</scope>
+            </dependency>
 
+            <!-- spring -->
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>
@@ -142,71 +202,11 @@
                 <version>${axon.version}</version>
             </dependency>
 
-            <!-- logging dependencies -->
-            <dependency>
-                <groupId>be.vdab.vac-team.commons</groupId>
-                <artifactId>commons-logstash-utils-dep</artifactId>
-                <version>${vac-team.commons.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.oracle.jdbc</groupId>
-                <artifactId>ojdbc8</artifactId>
-                <version>${oracle.version}</version>
-                <scope>provided</scope>
-            </dependency>
-
-            <!-- swagger -->
-            <dependency>
-                <groupId>org.springdoc</groupId>
-                <artifactId>springdoc-openapi-ui</artifactId>
-                <version>${springdoc-openapi.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.awaitility</groupId>
-                <artifactId>awaitility</artifactId>
-                <version>${awaitility.version}</version>
-                <scope>test</scope>
-            </dependency>
-
-            <!-- testing -->
-            <dependency>
-                <groupId>org.mockito</groupId>
-                <artifactId>mockito-core</artifactId>
-                <version>${mockito.version}</version>
-            </dependency>
-
             <!-- sonar -->
             <dependency>
                 <groupId>org.sonarsource.java</groupId>
                 <artifactId>sonar-jacoco-listeners</artifactId>
                 <version>${sonar-jacoco-listeners.version}</version>
-                <scope>test</scope>
-            </dependency>
-
-            <!-- micrometer -->
-            <dependency>
-                <groupId>io.github.mweirauch</groupId>
-                <artifactId>micrometer-jvm-extras</artifactId>
-                <version>${micrometer.jvm.extras.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>be.vdab.monitoring</groupId>
-                <artifactId>vdab-metrics-spring-boot-starter</artifactId>
-                <version>${vdab-metrics-spring-boot-starter.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>be.vdab.opentracing</groupId>
-                <artifactId>vdab-opentracing-spring-boot-starter</artifactId>
-                <version>${opentracing.vdab.library.version}</version>
-            </dependency>
-
-            <!-- test container -->
-            <dependency>
-                <groupId>be.vdab.hermes</groupId>
-                <artifactId>hermes-testcontainers</artifactId>
-                <version>${vdab.hermes.testcontainers.version}</version>
                 <scope>test</scope>
             </dependency>
         </dependencies>
@@ -243,57 +243,6 @@
                         <escapeString>\</escapeString>
                         <useDefaultDelimiters>false</useDefaultDelimiters>
                     </configuration>
-                </plugin>
-                <plugin>
-                    <groupId>org.flywaydb</groupId>
-                    <artifactId>flyway-maven-plugin</artifactId>
-                    <version>${flyway.version}</version>
-                    <configuration>
-                        <!--suppress UnresolvedMavenProperty -->
-                        <user>${flyway.username}</user>
-                        <!--suppress UnresolvedMavenProperty -->
-                        <password>${flyway.password}</password>
-                        <!--suppress UnresolvedMavenProperty -->
-                        <url>${db.url}</url>
-                        <table>SCHEMA_VERSION</table>
-                        <driver>oracle.jdbc.OracleDriver</driver>
-                        <skip>${skipSql}</skip>
-                    </configuration>
-                    <executions>
-                        <execution>
-                            <phase>test-compile</phase>
-                            <goals>
-                                <goal>migrate</goal>
-                            </goals>
-                        </execution>
-                    </executions>
-                    <dependencies>
-                        <dependency>
-                            <groupId>com.oracle.jdbc</groupId>
-                            <artifactId>ojdbc8</artifactId>
-                            <version>${oracle.version}</version>
-                        </dependency>
-                    </dependencies>
-                </plugin>
-                <plugin>
-                    <groupId>org.codehaus.mojo</groupId>
-                    <artifactId>sql-maven-plugin</artifactId>
-                    <version>${sql-maven-plugin.version}</version>
-                    <configuration>
-                        <encoding>UTF-8</encoding>
-                        <driver>oracle.jdbc.OracleDriver</driver>
-                        <url>jdbc:oracle:thin:@localhost:1521/xe</url>
-                        <username>system</username>
-                        <password>oracle</password>
-                        <delimiter>/</delimiter>
-                    </configuration>
-                    <dependencies>
-                        <dependency>
-                            <groupId>com.oracle.jdbc</groupId>
-                            <artifactId>ojdbc8</artifactId>
-                            <version>${oracle.version}</version>
-                        </dependency>
-                    </dependencies>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -353,31 +302,6 @@
                     </executions>
                 </plugin>
                 <plugin>
-                    <groupId>pl.project13.maven</groupId>
-                    <artifactId>git-commit-id-plugin</artifactId>
-                    <version>${git-commit-id-maven-plugin.version}</version>
-                    <configuration>
-                        <failOnNoGitDirectory>false</failOnNoGitDirectory>
-                        <verbose>false</verbose>
-                    </configuration>
-                </plugin>
-                <plugin>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-maven-plugin</artifactId>
-                    <executions>
-                        <execution>
-                            <goals>
-                                <goal>build-info</goal>
-                            </goals>
-                            <configuration>
-                                <additionalProperties>
-                                    <time.formatted>${maven.build.timestamp}</time.formatted>
-                                </additionalProperties>
-                            </configuration>
-                        </execution>
-                    </executions>
-                </plugin>
-                <plugin>
                     <artifactId>maven-source-plugin</artifactId>
                     <executions>
                         <execution>
@@ -388,22 +312,6 @@
                             </goals>
                         </execution>
                     </executions>
-                </plugin>
-                <plugin>
-                    <groupId>be.vdab.mavenplugins</groupId>
-                    <artifactId>wardependencychecker-maven-plugin</artifactId>
-                    <version>${wardependencychecker-maven-plugin.version}</version>
-                </plugin>
-                <plugin>
-                    <groupId>be.vdab.mavenplugins</groupId>
-                    <artifactId>dependency-graph-generator-maven-plugin</artifactId>
-                    <version>${dependency-graph-generator.version}</version>
-                    <extensions>true</extensions>
-                </plugin>
-                <plugin>
-                    <groupId>org.sonarsource.scanner.maven</groupId>
-                    <artifactId>sonar-maven-plugin</artifactId>
-                    <version>${sonar-plugin.version}</version>
                 </plugin>
                 <plugin>
                     <groupId>org.jacoco</groupId>
@@ -441,6 +349,22 @@
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>build-info</goal>
+                        </goals>
+                        <configuration>
+                            <additionalProperties>
+                                <time.formatted>${maven.build.timestamp}</time.formatted>
+                            </additionalProperties>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
