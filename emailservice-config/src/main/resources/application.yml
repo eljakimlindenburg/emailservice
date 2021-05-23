@@ -17,16 +17,3 @@ db:
     postgreSql:
         schema: SCH_EMAILSERVICE
         dialect: org.hibernate.dialect.PostgreSQLDialect
-
-axon:
-    metrics.auto-configuration.enabled: true
-    axonserver.servers: axonserver01${service.appendix}:8124,axonserver02${service.appendix}:8124,axonserver03${service.appendix}:8124
-    vdab:
-        resource.tokens.prefix: management
-        db.schema: ${db.postgreSql.schema}
-        contextnames:
-            - emailservice
-        contexts:
-            documentbeheer:
-                primary: true
-        sagastore.enabled: true

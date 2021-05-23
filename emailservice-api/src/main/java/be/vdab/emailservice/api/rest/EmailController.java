@@ -1,28 +1,25 @@
 package be.vdab.emailservice.api.rest;
 
+import be.vdab.emailservice.api.dto.VerstuurEmailDto;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController(value = "/email")
+@RestController(value = "/email/verstuur")
 public class EmailController {
     
-    @PostMapping(path = "/verstuur")
-    public void verstuurEmail() {
-    
+    @PostMapping("/stmp")
+    public ResponseEntity<String> verstuurEmail(VerstuurEmailDto dto) {
+        return ResponseEntity.ok().build();
     }
     
-    @PostMapping(path = "/verstuur/aangetekend")
-    public void verstuurAangetekendeEmailViaDigiConnect() {
-    
+    @PostMapping(path = "/ringring")
+    public ResponseEntity<String> verstuurEmailViaRingRing(VerstuurEmailDto dto) {
+        return ResponseEntity.ok().build();
     }
     
-    @PostMapping(path = "/verstuur/ringring")
-    public void verstuurEmailViaRingRing() {
-    
-    }
-    
-    @PostMapping(path = "/verstuur/ringring")
-    public void verstuurEmailViaSendGrid() {
-    
+    @PostMapping(path = "/sendgrid")
+    public ResponseEntity<String> verstuurEmailViaSendGrid(VerstuurEmailDto dto) {
+        return ResponseEntity.ok().build();
     }
 }

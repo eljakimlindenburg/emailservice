@@ -24,6 +24,7 @@
         <dependency>
             <groupId>be.vdab.emailservice</groupId>
             <artifactId>emailservice-application</artifactId>
+            <classifier>classes</classifier>
         </dependency>
         <dependency>
             <groupId>be.vdab.emailservice</groupId>
@@ -39,7 +40,7 @@
         </dependency>
         <dependency>
             <groupId>be.vdab.emailservice</groupId>
-            <artifactId>emailservice-digiconnect-adapter</artifactId>
+            <artifactId>emailservice-infrastructure</artifactId>
         </dependency>
         <dependency>
             <groupId>be.vdab.emailservice</groupId>

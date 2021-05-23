@@ -22,7 +22,7 @@
         <module>emailservice-config</module>
         <module>emailservice-core-api</module>
         <module>emailservice-db-scripts</module>
-        <module>emailservice-digiconnect-adapter</module>
+        <module>emailservice-infrastructure</module>
         <module>emailservice-integration-test</module>
         <module>emailservice-report</module>
         <module>emailservice-ringring-adapter</module>
@@ -39,12 +39,8 @@
         <maven.build.timestamp.format>yyyy-MM-dd HH:mm:ss</maven.build.timestamp.format>
         <skipUnittests>false</skipUnittests>
         <skipIntegrationtests>false</skipIntegrationtests>
-        <skipSql>false</skipSql>
 
         <!-- vdab versies -->
-        <axon.version>4.4.8</axon.version>
-        <axon-vdab-library.version>4.4.7-116</axon-vdab-library.version>
-        <vdab.hermes.testcontainers.version>[1.0.0, 1.0.999999999)</vdab.hermes.testcontainers.version>
         <wardependencychecker-maven-plugin.version>1.0.0-6</wardependencychecker-maven-plugin.version>
 
         <!-- vaste versies -->
@@ -55,7 +51,7 @@
         <sonar-jacoco-listeners.version>5.14.0.18788</sonar-jacoco-listeners.version>
 
         <!-- Sonar -->
-        <sonar.host.url>http://sonaree.vdab.be:9000</sonar.host.url> <!-- TODO: andere url -->
+        <sonar.host.url>http://localhost:9000</sonar.host.url>
         <sonar.coverage.jacoco.xmlReportPaths>
             ${basedir}/../emailservice-report/target/site/jacoco-aggregate/jacoco.xml
         </sonar.coverage.jacoco.xmlReportPaths>
@@ -106,15 +102,8 @@
             </dependency>
             <dependency>
                 <groupId>be.vdab.emailservice</groupId>
-                <artifactId>emailservice-digiconnect-adapter</artifactId>
+                <artifactId>emailservice-infrastructure</artifactId>
                 <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>be.vdab.emailservice</groupId>
-                <artifactId>emailservice-digiconnect-adapter</artifactId>
-                <version>${project.version}</version>
-                <scope>test</scope>
-                <type>test-jar</type>
             </dependency>
             <dependency>
                 <groupId>be.vdab.emailservice</groupId>
@@ -177,29 +166,6 @@
                 <version>${spring-cloud.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
-            </dependency>
-
-            <!-- axon -->
-            <dependency>
-                <groupId>be.vdab.axon</groupId>
-                <artifactId>axon-vdab-extensie-spring-boot-starter</artifactId>
-                <version>${axon-vdab-library.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>be.vdab.axon</groupId>
-                <artifactId>axon-vdab-extensie-spring</artifactId>
-                <version>${axon-vdab-library.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.axonframework</groupId>
-                <artifactId>axon-test</artifactId>
-                <version>${axon.version}</version>
-                <scope>test</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.axonframework</groupId>
-                <artifactId>axon-micrometer</artifactId>
-                <version>${axon.version}</version>
             </dependency>
 
             <!-- sonar -->
@@ -302,6 +268,22 @@
                     </executions>
                 </plugin>
                 <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>build-info</goal>
+                            </goals>
+                            <configuration>
+                                <additionalProperties>
+                                    <time.formatted>${maven.build.timestamp}</time.formatted>
+                                </additionalProperties>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
                     <artifactId>maven-source-plugin</artifactId>
                     <executions>
                         <execution>
@@ -312,6 +294,11 @@
                             </goals>
                         </execution>
                     </executions>
+                </plugin>
+                <plugin>
+                    <groupId>be.vdab.mavenplugins</groupId>
+                    <artifactId>wardependencychecker-maven-plugin</artifactId>
+                    <version>${wardependencychecker-maven-plugin.version}</version>
                 </plugin>
                 <plugin>
                     <groupId>org.jacoco</groupId>
@@ -341,10 +328,6 @@
             </plugin>
             <plugin>
                 <artifactId>maven-source-plugin</artifactId>
-            </plugin>
-            <plugin>
-                <groupId>be.vdab.mavenplugins</groupId>
-                <artifactId>dependency-graph-generator-maven-plugin</artifactId>
             </plugin>
             <plugin>
                 <groupId>org.jacoco</groupId>
