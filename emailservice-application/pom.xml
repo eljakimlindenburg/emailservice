@@ -47,15 +47,15 @@
         </dependency>
         <dependency>
             <groupId>be.pxl.emailservice</groupId>
-            <artifactId>emailservice-ringring-adapter</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>be.pxl.emailservice</groupId>
             <artifactId>emailservice-sendgrid-adapter</artifactId>
         </dependency>
         <dependency>
             <groupId>be.pxl.emailservice</groupId>
             <artifactId>emailservice-smtp-adapter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>be.pxl.emailservice</groupId>
+            <artifactId>emailservice-sparkpost-adapter</artifactId>
         </dependency>
         <dependency>
             <groupId>be.pxl.emailservice</groupId>

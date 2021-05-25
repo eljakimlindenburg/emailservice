@@ -25,9 +25,9 @@
 		<module>emailservice-infrastructure</module>
 		<module>emailservice-integration-test</module>
 		<module>emailservice-report</module>
-		<module>emailservice-ringring-adapter</module>
 		<module>emailservice-sendgrid-adapter</module>
 		<module>emailservice-smtp-adapter</module>
+		<module>emailservice-sparkpost-adapter</module>
 		<module>emailservice-test-infrastructure</module>
 	</modules>
 
@@ -42,6 +42,10 @@
 
 		<!-- vaste versies -->
 		<spring-cloud.version>2020.0.2</spring-cloud.version>
+
+		<!-- email -->
+		<sparkpost.version>0.23</sparkpost.version>
+		<sendgrid.version>4.7.2</sendgrid.version>
 
 		<!-- plugin versies -->
 		<jacoco-maven-plugin.version>0.8.5</jacoco-maven-plugin.version>
@@ -117,24 +121,24 @@
 			</dependency>
 			<dependency>
 				<groupId>be.pxl.emailservice</groupId>
-				<artifactId>emailservice-ringring-adapter</artifactId>
+				<artifactId>emailservice-sendgrid-adapter</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>be.pxl.emailservice</groupId>
-				<artifactId>emailservice-ringring-adapter</artifactId>
+				<artifactId>emailservice-sendgrid-adapter</artifactId>
 				<version>${project.version}</version>
 				<scope>test</scope>
 				<type>test-jar</type>
 			</dependency>
 			<dependency>
 				<groupId>be.pxl.emailservice</groupId>
-				<artifactId>emailservice-sendgrid-adapter</artifactId>
+				<artifactId>emailservice-sparkpost-adapter</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>be.pxl.emailservice</groupId>
-				<artifactId>emailservice-sendgrid-adapter</artifactId>
+				<artifactId>emailservice-sparkpost-adapter</artifactId>
 				<version>${project.version}</version>
 				<scope>test</scope>
 				<type>test-jar</type>
@@ -173,6 +177,20 @@
 				<artifactId>sonar-jacoco-listeners</artifactId>
 				<version>${sonar-jacoco-listeners.version}</version>
 				<scope>test</scope>
+			</dependency>
+
+			<!-- sparkpost -->
+			<dependency>
+				<groupId>com.sparkpost</groupId>
+				<artifactId>sparkpost-lib</artifactId>
+				<version>${sparkpost.version}</version>
+			</dependency>
+
+			<!-- sendgrid -->
+			<dependency>
+				<groupId>com.sendgrid</groupId>
+				<artifactId>sendgrid-java</artifactId>
+				<version>${sendgrid.version}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
@@ -313,4 +331,11 @@
 			</plugin>
 		</plugins>
 	</build>
+
+	<distributionManagement>
+		<repository>
+			<id>releases</id>
+			<url>http://nexus.vdab.be:8081/repository/maven-releases</url>
+		</repository>
+	</distributionManagement>
 </project>

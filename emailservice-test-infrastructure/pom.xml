@@ -21,6 +21,7 @@
 		<dependency>
 			<groupId>be.pxl.emailservice</groupId>
 			<artifactId>emailservice-infrastructure</artifactId>
+			<scope>compile</scope>
 		</dependency>
 
 		<dependency>
