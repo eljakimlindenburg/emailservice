@@ -57,6 +57,7 @@
 		</sonar.coverage.jacoco.xmlReportPaths>
 		<sonar.projectKey>eljakimlindenburg_emailservice</sonar.projectKey>
 		<sonar.moduleKey>${project.groupId}:${project.artifactId}</sonar.moduleKey>
+		<sonar.organization>eljakimlindenburg</sonar.organization>
 		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
 	</properties>
 
