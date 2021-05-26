@@ -10,5 +10,32 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>emailservice-integration-test</artifactId>
-    
+
+	<properties>
+		<sonar.coverage.exclusions>
+			**/*.java <!-- this module is only used for testing -->
+		</sonar.coverage.exclusions>
+	</properties>
+
+	<dependencies>
+		<!-- modules -->
+		<dependency>
+			<groupId>be.pxl.emailservice</groupId>
+			<artifactId>emailservice-application</artifactId>
+			<classifier>classes</classifier>
+		</dependency>
+		<dependency>
+			<groupId>be.pxl.emailservice</groupId>
+			<artifactId>emailservice-sendgrid-adapter</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>be.pxl.emailservice</groupId>
+			<artifactId>emailservice-sparkpost-adapter</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+		</dependency>
+	</dependencies>
 </project>

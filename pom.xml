@@ -29,6 +29,7 @@
 		<module>emailservice-smtp-adapter</module>
 		<module>emailservice-sparkpost-adapter</module>
 		<module>emailservice-test-infrastructure</module>
+		<module>emailservice-ui</module>
 	</modules>
 
 	<properties>
@@ -40,18 +41,14 @@
 		<skipUnittests>false</skipUnittests>
 		<skipIntegrationtests>false</skipIntegrationtests>
 
-		<!-- vaste versies -->
+		<!-- versies -->
 		<spring-cloud.version>2020.0.2</spring-cloud.version>
-
-		<!-- email -->
 		<sparkpost.version>0.23</sparkpost.version>
 		<sendgrid.version>4.7.2</sendgrid.version>
-
-		<!-- plugin versies -->
 		<jacoco-maven-plugin.version>0.8.5</jacoco-maven-plugin.version>
 		<sonar-jacoco-listeners.version>5.14.0.18788</sonar-jacoco-listeners.version>
 
-		<!-- Sonar -->
+		<!-- sonar -->
 		<sonar.coverage.jacoco.xmlReportPaths>
 			${basedir}/../emailservice-report/target/site/jacoco-aggregate/jacoco.xml
 		</sonar.coverage.jacoco.xmlReportPaths>
@@ -161,6 +158,11 @@
 				<artifactId>emailservice-test-infrastructure</artifactId>
 				<version>${project.version}</version>
 				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>be.pxl.emailservice</groupId>
+				<artifactId>emailservice-ui</artifactId>
+				<version>${project.version}</version>
 			</dependency>
 
 			<!-- spring -->

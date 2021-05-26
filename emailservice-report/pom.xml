@@ -62,6 +62,10 @@
             <groupId>be.pxl.emailservice</groupId>
             <artifactId>emailservice-test-infrastructure</artifactId>
         </dependency>
+        <dependency>
+            <groupId>be.pxl.emailservice</groupId>
+            <artifactId>emailservice-ui</artifactId>
+        </dependency>
     </dependencies>
 
     <build>

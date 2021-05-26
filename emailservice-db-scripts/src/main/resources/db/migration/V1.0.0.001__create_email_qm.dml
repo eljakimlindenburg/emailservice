@@ -1,0 +1,19 @@
+reate SEQUENCE ZENDING_REPRESENTATIES_SEQ;
+
+create table EMAIL_QM (
+    ID                   NUMBER(19, 0) NOT NULL,
+    COMMUNICATIE_TYPE    VARCHAR2(255 CHAR) NOT NULL,
+    KANAAL               VARCHAR2(28 CHAR) NOT NULL,
+    primary key(ID)
+);
+
+create INDEX ZENDING_REPRESENTATIES_COMMUNICATIE_TYPE_IDX on ZENDING_REPRESENTATIES(COMMUNICATIE_TYPE);
+create INDEX ZENDING_REPRESENTATIES_KANAAL_IDX on ZENDING_REPRESENTATIES(KANAAL);
+
+comment on table ZENDING_REPRESENTATIES                     is 'tabel die voor alle communicatie types de parameters bijhoudt';
+comment on column ZENDING_REPRESENTATIES.ID                 is 'database sequence';
+comment on column ZENDING_REPRESENTATIES.COMMUNICATIE_TYPE  is 'communicatie type van de zending';
+comment on column ZENDING_REPRESENTATIES.KANAAL             is 'kanaal van de zending (BRIEF,EMAIL,SMS,DIGITALE_COMMUNICATIE_RUIMTE)';
+comment on column ZENDING_REPRESENTATIES.BERICHT_TYPE       is 'document type die moet gebruikt worden voor het bericht van de zending';
+comment on column ZENDING_REPRESENTATIES.ONDERWERP          is 'onderwerp dat bij het bericht van deze zending hoort';
+comment on column ZENDING_REPRESENTATIES.RETENTIEPERIODE    is 'geeft aan hoe lang de zending moet worden bijgehouden (in dagen)';
