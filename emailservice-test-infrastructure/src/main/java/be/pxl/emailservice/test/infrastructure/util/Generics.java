@@ -2,7 +2,6 @@ package be.pxl.emailservice.test.infrastructure.util;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public final class Generics {
@@ -22,9 +21,8 @@ public final class Generics {
     }
     
     private static Class<?> getClassFromTypeName(String typeName) {
-        @SuppressWarnings("squid:S4784")
-        Pattern pattern = Pattern.compile("^(.*)<.*>$");
-        Matcher typeNameMatcher = pattern.matcher(typeName);
+        var pattern = Pattern.compile("^(.*)<.*>$");
+        var typeNameMatcher = pattern.matcher(typeName);
         if (typeNameMatcher.matches()) {
             return classFromString(typeNameMatcher.group(1));
         } else {

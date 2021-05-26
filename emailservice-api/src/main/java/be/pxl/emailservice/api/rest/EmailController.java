@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class EmailController {
     
     @GetMapping(value = "/{uuid}/geopend")
-    public void emailGeopend(@PathVariable UUID uuid) {
-    
+    public void notificeerEmailGeopend(@PathVariable UUID uuid) {
+        throw new UnsupportedOperationException();
     }
     
     @PostMapping("/verstuur/stmp")

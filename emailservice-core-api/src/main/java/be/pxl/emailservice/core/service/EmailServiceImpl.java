@@ -6,6 +6,6 @@ public class EmailServiceImpl implements EmailService {
     
     @Override
     public void verstuurEmail(Email email) {
-    
+        throw new UnsupportedOperationException();
     }
 }

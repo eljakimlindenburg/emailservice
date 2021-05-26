@@ -24,7 +24,7 @@ public class Whitebox {
     public static void setInternalState(Object target, String field, Object value) {
         Class<?> c = target.getClass();
         try {
-            Field f = getFieldFromHierarchy(c, field);
+            var f = getFieldFromHierarchy(c, field);
             f.setAccessible(true);
             f.set(target, value);
         } catch (Exception e) {
@@ -33,7 +33,7 @@ public class Whitebox {
     }
     
     private static Field getFieldFromHierarchy(Class<?> clazz, String field) {
-        Field f = getField(clazz, field);
+        var f = getField(clazz, field);
         while (f == null && clazz != Object.class) {
             clazz = clazz.getSuperclass();
             f = getField(clazz, field);
