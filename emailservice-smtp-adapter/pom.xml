@@ -11,4 +11,15 @@
 
     <artifactId>emailservice-smtp-adapter</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>be.pxl.emailservice</groupId>
+            <artifactId>emailservice-core-api</artifactId>
+        </dependency>
+    </dependencies>
+
 </project>

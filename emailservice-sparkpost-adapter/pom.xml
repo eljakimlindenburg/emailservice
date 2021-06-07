@@ -12,6 +12,19 @@
     <artifactId>emailservice-sparkpost-adapter</artifactId>
 
     <dependencies>
+        <!-- modules -->
+        <dependency>
+            <groupId>be.pxl.emailservice</groupId>
+            <artifactId>emailservice-core-api</artifactId>
+        </dependency>
+
+        <!-- spring -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <!-- sparkpost -->
         <dependency>
             <groupId>com.sparkpost</groupId>
             <artifactId>sparkpost-lib</artifactId>

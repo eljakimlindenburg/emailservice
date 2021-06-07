@@ -12,6 +12,7 @@
     <artifactId>emailservice-api</artifactId>
 
     <dependencies>
+        <!-- modules -->
         <dependency>
             <groupId>be.pxl.emailservice</groupId>
             <artifactId>emailservice-core-api</artifactId>
@@ -28,10 +29,17 @@
             <scope>test</scope>
         </dependency>
 
+        <!-- spring -->
         <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-web</artifactId>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <!-- email validatie -->
+        <dependency>
+            <groupId>commons-validator</groupId>
+            <artifactId>commons-validator</artifactId>
         </dependency>
     </dependencies>
-    
+
 </project>

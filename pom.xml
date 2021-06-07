@@ -20,6 +20,7 @@
 		<module>emailservice-api</module>
 		<module>emailservice-application</module>
 		<module>emailservice-config</module>
+        <module>emailservice-core</module>
 		<module>emailservice-core-api</module>
 		<module>emailservice-db-scripts</module>
 		<module>emailservice-infrastructure</module>
@@ -50,6 +51,7 @@
 		<node.version>v14.17.0</node.version>
 		<npm.version>7.14.0</npm.version>
 		<frontend-maven-plugin.version>1.12.0</frontend-maven-plugin.version>
+        <apache-commons-validator.version>1.7</apache-commons-validator.version>
 
 		<!-- sonar -->
 		<sonar.coverage.jacoco.xmlReportPaths>
@@ -79,7 +81,6 @@
 			<dependency>
 				<groupId>be.pxl.emailservice</groupId>
 				<artifactId>emailservice-application</artifactId>
-				<classifier>classes</classifier>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
@@ -87,6 +88,18 @@
 				<artifactId>emailservice-config</artifactId>
 				<version>${project.version}</version>
 			</dependency>
+            <dependency>
+                <groupId>be.pxl.emailservice</groupId>
+                <artifactId>emailservice-core</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>be.pxl.emailservice</groupId>
+                <artifactId>emailservice-core</artifactId>
+                <version>${project.version}</version>
+                <scope>test</scope>
+                <type>test-jar</type>
+            </dependency>
 			<dependency>
 				<groupId>be.pxl.emailservice</groupId>
 				<artifactId>emailservice-core-api</artifactId>
@@ -176,6 +189,13 @@
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
+
+            <!-- apache -->
+            <dependency>
+                <groupId>commons-validator</groupId>
+                <artifactId>commons-validator</artifactId>
+                <version>${apache-commons-validator.version}</version>
+            </dependency>
 
 			<!-- sonar -->
 			<dependency>

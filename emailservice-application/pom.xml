@@ -10,11 +10,10 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>emailservice-application</artifactId>
-    <packaging>war</packaging>
 
     <properties>
         <sonar.coverage.exclusions>
-        **/Application.java,                <!-- part of application startup, not picked up by sonar -->
+        **/Application.java                <!-- part of application startup, not picked up by sonar -->
         </sonar.coverage.exclusions>
     </properties>
 
@@ -27,6 +26,10 @@
         <dependency>
             <groupId>be.pxl.emailservice</groupId>
             <artifactId>emailservice-config</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>be.pxl.emailservice</groupId>
+            <artifactId>emailservice-core</artifactId>
         </dependency>
         <dependency>
             <groupId>be.pxl.emailservice</groupId>
