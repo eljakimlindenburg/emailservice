@@ -40,14 +40,13 @@ jobs:
         run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar
         
       - name: Create Jar with Maven
-        working-directory: emailservice
         run: mvn clean install -DskipUnittests=true -DskipIntegrationtests=true
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
         with:
           name: java-app
-          path: emailservice/emailservice-application/target/*.jar
+          path: emailservice-application/target/*.jar
           
   deploy:
       runs-on: ubuntu-latest
