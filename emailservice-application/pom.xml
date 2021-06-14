@@ -90,6 +90,9 @@
                         </goals>
                     </execution>
                 </executions>
+                <configuration>
+                    <outputFile>${dir}/app.jar</outputFile>
+                </configuration>
             </plugin>
         </plugins>
     </build>
