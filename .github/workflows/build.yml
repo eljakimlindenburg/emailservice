@@ -45,7 +45,6 @@ jobs:
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
         with:
-          name: java-app
           path: '/home/runner/work/emailservice/emailservice-application/target/*.jar' 
           
   deploy:
