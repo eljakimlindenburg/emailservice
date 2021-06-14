@@ -340,12 +340,6 @@
 						<npmVersion>${npm.version}</npmVersion>
 					</configuration>
 				</plugin>
-                <plugin>
-                    <artifactId>maven-war-plugin</artifactId>
-                    <configuration>
-                        <attachClasses>true</attachClasses>
-                    </configuration>
-                </plugin>
 			</plugins>
 		</pluginManagement>
 
@@ -356,9 +350,6 @@
 			<plugin>
 				<artifactId>maven-source-plugin</artifactId>
 			</plugin>
-            <plugin>
-                <artifactId>maven-war-plugin</artifactId>
-            </plugin>
 			<plugin>
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
