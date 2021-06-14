@@ -41,7 +41,7 @@ jobs:
         run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar
         
       - name: Create Jar with Maven
-        run: mvn clean install
+        run: mvn clean install -DskipUnittests=true -DskipIntegrationtests=true
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
