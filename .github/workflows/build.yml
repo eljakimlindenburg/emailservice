@@ -47,7 +47,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: java-app
-          path: '/emailservice/emailservice-application/target/*.jar' 
+          path: emailservice/emailservice-application/target/*.jar
           
   deploy:
       runs-on: ubuntu-latest
