@@ -1,19 +1,20 @@
-server:
-    servlet:
-        context-path: /emailservice
-
 spring:
     application:
         name: emailservice
     profiles:
         active: server
     cloud.discovery.client.composite-indicator.enabled: false
-    jpa.properties:
-        hibernate:
-            default_schema: ${db.postgreSql.schema}
-            dialect: org.hibernate.dialect.PostgreSQLDialect
+    jpa.database-platform: org.hibernate.dialect.H2Dialect
+    datasource:
+        url: jdbc:h2:mem:testdb
+        driverClassName: org.h2.Driver
+        username: username
+        password: password
+    h2.console.enabled: true
 
-db:
-    postgreSql:
-        schema: SCH_EMAILSERVICE
-        dialect: org.hibernate.dialect.PostgreSQLDialect
+email:
+    sendgrid:
+        apiKey: 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
+        verified.emailaddress.from: eljakim.lindenburg@student.pxl.be
+
+application.url: https://webhook.site/7d2a0c9b-0778-48f7-968d-a16e9d1ae73f

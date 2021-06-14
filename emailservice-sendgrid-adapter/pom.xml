@@ -15,6 +15,10 @@
         <!-- modules -->
         <dependency>
             <groupId>be.pxl.emailservice</groupId>
+            <artifactId>emailservice-config</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>be.pxl.emailservice</groupId>
             <artifactId>emailservice-core-api</artifactId>
         </dependency>
 

@@ -1,5 +1,0 @@
--- set the correct grants on the tables in the schema
-BEGIN
-  ops$oracle.grant_after_top.apply_new_grants ('SCH_EMAILSERVICE');
-END;
-/

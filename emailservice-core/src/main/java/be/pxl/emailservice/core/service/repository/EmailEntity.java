@@ -13,7 +13,6 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @SuppressWarnings("squid:S2160")
@@ -22,9 +21,8 @@ import javax.persistence.Table;
 public class EmailEntity extends EqualsByStateObject {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "EMAIL_QM_SEQ")
-    @SequenceGenerator(name = "EMAIL_QM_SEQ", sequenceName = "EMAIL_QM_SEQ", allocationSize = 1)
     @Column
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "CORRELATIE_UUID")
@@ -35,6 +33,7 @@ public class EmailEntity extends EqualsByStateObject {
     private Provider provider;
 
     @Column(name = "STATUS")
+    @Enumerated(EnumType.STRING)
     private Status status;
 
     @Column(name = "CREATIE_TIMESTAMP")
@@ -43,11 +42,20 @@ public class EmailEntity extends EqualsByStateObject {
     @Column(name = "LAATSTE_UPDATE_TIMESTAMP")
     private Instant laatsteUpdateTimestamp;
 
-    @Column(name = "GEADRESSEERDE")
-    private String geadresseerde;
+    @Column(name = "AFZENDER")
+    private String afzender;
+
+    @Column(name = "GEADRESSEERDE_EMAIL")
+    private String geadresseerdeEmail;
+
+    @Column(name = "GEADRESSEERDE_NAAM")
+    private String geadresseerdeNaam;
 
     @Column(name = "INHOUD")
     private String inhoud;
+
+    @Column(name = "ONDERWERP")
+    private String onderwerp;
 
     public static Builder builder() {
         return new Builder();
@@ -57,24 +65,12 @@ public class EmailEntity extends EqualsByStateObject {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public UUID getCorrelatieUuid() {
         return correlatieUuid;
     }
 
-    public void setCorrelatieUuid(UUID correlatieUuid) {
-        this.correlatieUuid = correlatieUuid;
-    }
-
     public Provider getProvider() {
         return provider;
-    }
-
-    public void setProvider(Provider provider) {
-        this.provider = provider;
     }
 
     public Status getStatus() {
@@ -89,10 +85,6 @@ public class EmailEntity extends EqualsByStateObject {
         return creatieTimestamp;
     }
 
-    public void setCreatieTimestamp(Instant creatieTimestamp) {
-        this.creatieTimestamp = creatieTimestamp;
-    }
-
     public Instant getLaatsteUpdateTimestamp() {
         return laatsteUpdateTimestamp;
     }
@@ -101,20 +93,24 @@ public class EmailEntity extends EqualsByStateObject {
         this.laatsteUpdateTimestamp = laatsteUpdateTimestamp;
     }
 
-    public String getGeadresseerde() {
-        return geadresseerde;
+    public String getAfzender() {
+        return afzender;
     }
 
-    public void setGeadresseerde(String geadresseerde) {
-        this.geadresseerde = geadresseerde;
+    public String getGeadresseerdeEmail() {
+        return geadresseerdeEmail;
+    }
+
+    public String getGeadresseerdeNaam() {
+        return geadresseerdeNaam;
     }
 
     public String getInhoud() {
         return inhoud;
     }
 
-    public void setInhoud(String inhoud) {
-        this.inhoud = inhoud;
+    public String getOnderwerp() {
+        return onderwerp;
     }
 
     public static class Builder extends NestedBuilder<EmailEntity> {
@@ -157,13 +153,28 @@ public class EmailEntity extends EqualsByStateObject {
             return this;
         }
 
-        public Builder geadresseerde(String geadresseerde) {
-            instance().geadresseerde = geadresseerde;
+        public Builder afzender(String afzender) {
+            instance().afzender = afzender;
+            return this;
+        }
+
+        public Builder geadresseerdeEmail(String geadresseerdeEmail) {
+            instance().geadresseerdeEmail = geadresseerdeEmail;
+            return this;
+        }
+
+        public Builder geadresseerdeNaam(String geadresseerdeNaam) {
+            instance().geadresseerdeNaam = geadresseerdeNaam;
             return this;
         }
 
         public Builder inhoud(String inhoud) {
             instance().inhoud = inhoud;
+            return this;
+        }
+
+        public Builder onderwerp(String onderwerp) {
+            instance().onderwerp = onderwerp;
             return this;
         }
     }

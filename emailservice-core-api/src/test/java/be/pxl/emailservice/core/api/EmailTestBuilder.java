@@ -10,8 +10,11 @@ public class EmailTestBuilder {
     private Status status = Status.INITIEEL;
     private Instant creatieTimestamp = Instant.now();
     private Instant laatsteUpdateTimestamp = Instant.now();
-    private String geadresseerde;
-    private String inhoud;
+    private String afzender = "afzender";
+    private String geadresseerdeEmail = "test@google.be";
+    private String geadresseerdeNaam = "test mij";
+    private String inhoud = "testinhoud";
+    private String onderwerp = "testonderwerp";
 
     public static EmailTestBuilder anEmail() {
         return new EmailTestBuilder();
@@ -45,8 +48,18 @@ public class EmailTestBuilder {
         return this;
     }
 
-    public EmailTestBuilder geadresseerde(String geadresseerde) {
-        this.geadresseerde = geadresseerde;
+    public EmailTestBuilder afzender(String afzender) {
+        this.afzender = afzender;
+        return this;
+    }
+
+    public EmailTestBuilder geadresseerdeEmail(String geadresseerdeEmail) {
+        this.geadresseerdeEmail = geadresseerdeEmail;
+        return this;
+    }
+
+    public EmailTestBuilder geadresseerdeNaam(String geadresseerdeNaam) {
+        this.geadresseerdeNaam = geadresseerdeNaam;
         return this;
     }
 
@@ -55,15 +68,23 @@ public class EmailTestBuilder {
         return this;
     }
 
-    public Email build() {
-        return Email.builder()
+    public EmailTestBuilder onderwerp(String onderwerp) {
+        this.onderwerp = onderwerp;
+        return this;
+    }
+
+    public EmailDto build() {
+        return EmailDto.builder()
             .correlatieUuid(correlatieUuid)
             .provider(provider)
             .status(status)
             .creatieTimestamp(creatieTimestamp)
             .laatsteUpdateTimestamp(laatsteUpdateTimestamp)
-            .geadresseerde(geadresseerde)
+            .afzender(afzender)
+            .geadresseerdeEmail(geadresseerdeEmail)
+            .geadresseerdeNaam(geadresseerdeNaam)
             .inhoud(inhoud)
+            .onderwerp(onderwerp)
             .build();
     }
 }

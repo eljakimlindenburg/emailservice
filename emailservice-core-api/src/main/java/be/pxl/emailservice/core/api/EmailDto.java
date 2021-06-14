@@ -4,21 +4,24 @@ import be.pxl.emailservice.core.api.util.NestedBuilder;
 import java.time.Instant;
 import java.util.UUID;
 
-public class Email {
+public class EmailDto {
 
     private UUID correlatieUuid;
     private Provider provider;
     private Status status;
     private Instant creatieTimestamp;
     private Instant laatsteUpdateTimestamp;
-    private String geadresseerde;
+    private String afzender;
+    private String geadresseerdeEmail;
+    private String geadresseerdeNaam;
     private String inhoud;
+    private String onderwerp;
 
     public static Builder builder() {
         return new Builder();
     }
 
-    private Email() {
+    private EmailDto() {
     }
 
     public UUID getCorrelatieUuid() {
@@ -33,6 +36,10 @@ public class Email {
         return status;
     }
 
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
     public Instant getCreatieTimestamp() {
         return creatieTimestamp;
     }
@@ -41,22 +48,34 @@ public class Email {
         return laatsteUpdateTimestamp;
     }
 
-    public String getGeadresseerde() {
-        return geadresseerde;
+    public String getAfzender() {
+        return afzender;
+    }
+
+    public String getGeadresseerdeEmail() {
+        return geadresseerdeEmail;
+    }
+
+    public String getGeadresseerdeNaam() {
+        return geadresseerdeNaam;
     }
 
     public String getInhoud() {
         return inhoud;
     }
 
-    public static class Builder extends NestedBuilder<Email> {
+    public String getOnderwerp() {
+        return onderwerp;
+    }
+
+    public static class Builder extends NestedBuilder<EmailDto> {
 
         private Builder() {
         }
 
         @Override
-        protected Email createInstance() {
-            return new Email();
+        protected EmailDto createInstance() {
+            return new EmailDto();
         }
 
         public Builder correlatieUuid(UUID correlatieUuid) {
@@ -84,13 +103,28 @@ public class Email {
             return this;
         }
 
-        public Builder geadresseerde(String geadresseerde) {
-            instance().geadresseerde = geadresseerde;
+        public Builder afzender(String afzender) {
+            instance().afzender = afzender;
+            return this;
+        }
+
+        public Builder geadresseerdeEmail(String geadresseerdeEmail) {
+            instance().geadresseerdeEmail = geadresseerdeEmail;
+            return this;
+        }
+
+        public Builder geadresseerdeNaam(String geadresseerdeNaam) {
+            instance().geadresseerdeNaam = geadresseerdeNaam;
             return this;
         }
 
         public Builder inhoud(String inhoud) {
             instance().inhoud = inhoud;
+            return this;
+        }
+
+        public Builder onderwerp(String onderwerp) {
+            instance().onderwerp = onderwerp;
             return this;
         }
     }

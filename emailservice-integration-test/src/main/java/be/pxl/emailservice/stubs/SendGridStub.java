@@ -2,7 +2,7 @@ package be.pxl.emailservice.stubs;
 
 import static org.springframework.web.bind.annotation.RequestMethod.HEAD;
 
-import be.pxl.emailservice.sendgrid.SendGridRequest;
+import com.sendgrid.Request;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/stub/sendgrid")
 public class SendGridStub implements Stub {
 
-    private final Map<String, List<SendGridRequest>> receivedEmailRequests = new HashMap<>();
+    private final Map<String, List<Request>> receivedEmailRequests = new HashMap<>();
     private HttpStatus status = HttpStatus.OK;
 
     @RequestMapping(method = HEAD, path = "/info")
@@ -38,7 +38,7 @@ public class SendGridStub implements Stub {
         this.status = status;
     }
 
-    public List<SendGridRequest> getReceivedEmailRequests(String emailAdres) {
+    public List<Request> getReceivedEmailRequests(String emailAdres) {
         return receivedEmailRequests.getOrDefault(emailAdres, new ArrayList<>());
     }
 

@@ -5,6 +5,7 @@ public enum Status {
     INITIEEL,
     VERZONDEN,
     HARD_BOUNCE,
-    GEOPEND
+    GEOPEND,
+    VERZENDING_MISLUKT
 
 }

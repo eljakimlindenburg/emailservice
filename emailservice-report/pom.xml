@@ -24,6 +24,7 @@
         <dependency>
             <groupId>be.pxl.emailservice</groupId>
             <artifactId>emailservice-application</artifactId>
+            <classifier>classes</classifier>
         </dependency>
         <dependency>
             <groupId>be.pxl.emailservice</groupId>
@@ -36,10 +37,6 @@
         <dependency>
             <groupId>be.pxl.emailservice</groupId>
             <artifactId>emailservice-core-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>be.pxl.emailservice</groupId>
-            <artifactId>emailservice-db-scripts</artifactId>
         </dependency>
         <dependency>
             <groupId>be.pxl.emailservice</groupId>

@@ -22,7 +22,6 @@
 		<module>emailservice-config</module>
         <module>emailservice-core</module>
 		<module>emailservice-core-api</module>
-		<module>emailservice-db-scripts</module>
 		<module>emailservice-infrastructure</module>
 		<module>emailservice-integration-test</module>
 		<module>emailservice-report</module>
@@ -81,6 +80,7 @@
 			<dependency>
 				<groupId>be.pxl.emailservice</groupId>
 				<artifactId>emailservice-application</artifactId>
+                <classifier>classes</classifier>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
@@ -111,11 +111,6 @@
 				<version>${project.version}</version>
 				<scope>test</scope>
 				<type>test-jar</type>
-			</dependency>
-			<dependency>
-				<groupId>be.pxl.emailservice</groupId>
-				<artifactId>emailservice-db-scripts</artifactId>
-				<version>${project.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>be.pxl.emailservice</groupId>
@@ -345,22 +340,25 @@
 						<npmVersion>${npm.version}</npmVersion>
 					</configuration>
 				</plugin>
+                <plugin>
+                    <artifactId>maven-war-plugin</artifactId>
+                    <configuration>
+                        <attachClasses>true</attachClasses>
+                    </configuration>
+                </plugin>
 			</plugins>
 		</pluginManagement>
 
 		<plugins>
-			<plugin>
-				<artifactId>maven-war-plugin</artifactId>
-				<configuration>
-					<attachClasses>true</attachClasses>
-				</configuration>
-			</plugin>
 			<plugin>
 				<artifactId>maven-failsafe-plugin</artifactId>
 			</plugin>
 			<plugin>
 				<artifactId>maven-source-plugin</artifactId>
 			</plugin>
+            <plugin>
+                <artifactId>maven-war-plugin</artifactId>
+            </plugin>
 			<plugin>
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>

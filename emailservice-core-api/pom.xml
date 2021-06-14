@@ -19,6 +19,15 @@
 
     <dependencies>
         <dependency>
+            <groupId>be.pxl.emailservice</groupId>
+            <artifactId>emailservice-config</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>be.pxl.emailservice</groupId>
+            <artifactId>emailservice-test-infrastructure</artifactId>
+        </dependency>
+
+        <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
         </dependency>

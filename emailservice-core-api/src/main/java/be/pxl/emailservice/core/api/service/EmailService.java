@@ -1,10 +1,13 @@
 package be.pxl.emailservice.core.api.service;
 
-import be.pxl.emailservice.core.api.Email;
+import be.pxl.emailservice.core.api.EmailDto;
+import java.util.UUID;
 
 public interface EmailService {
 
-    void verstuurEmail(Email email);
+    void verstuurEmail(EmailDto dto);
 
-    void updateEmail(Email email);
+    void updateEmail(EmailDto dto);
+
+    void updateEmailGeopend(UUID uuid);
 }

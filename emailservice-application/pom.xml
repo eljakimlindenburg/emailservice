@@ -10,6 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>emailservice-application</artifactId>
+    <packaging>war</packaging>
 
     <properties>
         <sonar.coverage.exclusions>
@@ -34,10 +35,6 @@
         <dependency>
             <groupId>be.pxl.emailservice</groupId>
             <artifactId>emailservice-core-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>be.pxl.emailservice</groupId>
-            <artifactId>emailservice-db-scripts</artifactId>
         </dependency>
         <dependency>
             <groupId>be.pxl.emailservice</groupId>
