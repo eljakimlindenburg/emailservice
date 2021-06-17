@@ -34,7 +34,7 @@ public class EmailController {
 
     @GetMapping
     public String hello() {
-        return "Hello from the cloud";
+        return "Hello from Azure cloud";
     }
 
     @GetMapping(value = "/{uuid}")
