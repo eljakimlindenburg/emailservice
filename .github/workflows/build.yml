@@ -45,8 +45,8 @@ jobs:
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
         with:
-          name: emailservice-app
-          path: emailservice-application/target/app.jar
+          name: java-app
+          path: emailservice-application/target/*SNAPSHOT.jar
           
   deploy:
       runs-on: ubuntu-latest
@@ -59,7 +59,7 @@ jobs:
       - name: Download artifact from build job
         uses: actions/download-artifact@v2
         with:
-          name: emailservice-app
+          name: java-app
 
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
@@ -68,4 +68,4 @@ jobs:
           app-name: 'emailservice-app'
           slot-name: 'production'
           publish-profile: ${{ secrets.AzureAppService_PublishProfile_92dbfbbaeb834b6db528cd1a8e5f512e }}
-          package: 'app.jar'
+          package: '*SNAPSHOT.jar'
