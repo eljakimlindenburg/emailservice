@@ -23,21 +23,14 @@ public class EmailController {
 
     private static final Logger LOGGER = getLogger(EmailController.class);
 
-    private final ApplicationProperties properties;
     private final EmailValidator emailValidator;
     private final EmailService emailService;
     private final EmailMapper emailMapper;
 
-    public EmailController(ApplicationProperties properties, EmailService emailService, EmailMapper emailMapper, EmailValidator emailValidator) {
-        this.properties = properties;
+    public EmailController(EmailService emailService, EmailMapper emailMapper, EmailValidator emailValidator) {
         this.emailService = emailService;
         this.emailMapper = emailMapper;
         this.emailValidator = emailValidator;
-    }
-
-    @GetMapping
-    public String hello() {
-        return String.format("Hello from Azure cloud /n %s /n %s", properties.getSendGridApiKey(), properties.getVerifiedSendGridEmailaddress());
     }
 
     @GetMapping(value = "/{uuid}")
