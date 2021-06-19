@@ -23,6 +23,8 @@ import org.springframework.http.ResponseEntity;
 @ExtendWith(MockitoExtension.class)
 class EmailControllerTest {
 
+    private static final String ONGELDIG_EMAILADRES = "ONGELDIG_EMAILADRES";
+
     @Mock
     private EmailValidator emailValidator;
 
@@ -75,7 +77,7 @@ class EmailControllerTest {
     }
 
     @Test
-    void givenValidDto_whenVerstuurEmailSparkPost_thenVerstuurEmailUsingSparkPost_andReturnOk() {
+    void givenValidDto_whenVerstuurEmailMailgun_thenVerstuurEmailUsingSparkPost_andReturnOk() {
         ResponseEntity<String> expected = ResponseEntity.ok().build();
         VerstuurEmailRequestDto dto = aVerstuurEmailRequest().build();
         when(emailValidator.isValid(dto.getGeadresseerdeEmail())).thenReturn(true);
@@ -92,7 +94,7 @@ class EmailControllerTest {
 
     @Test
     void givenInvalidEmailAddress_whenVerstuurEmailSendGrid_thenReturnBadRequest() {
-        ResponseEntity<String> expected = ResponseEntity.badRequest().build();
+        ResponseEntity<String> expected = ResponseEntity.badRequest().body(ONGELDIG_EMAILADRES);
         VerstuurEmailRequestDto dto = aVerstuurEmailRequest().build();
         when(emailValidator.isValid(dto.getGeadresseerdeEmail())).thenReturn(false);
 
@@ -103,8 +105,8 @@ class EmailControllerTest {
     }
 
     @Test
-    void givenInvalidEmailAddress_whenVerstuurEmailSparkPost_thenReturnBadRequest() {
-        ResponseEntity<String> expected = ResponseEntity.badRequest().build();
+    void givenInvalidEmailAddress_whenVerstuurEmailMailgun_thenReturnBadRequest() {
+        ResponseEntity<String> expected = ResponseEntity.badRequest().body(ONGELDIG_EMAILADRES);
         VerstuurEmailRequestDto dto = aVerstuurEmailRequest().build();
         when(emailValidator.isValid(dto.getGeadresseerdeEmail())).thenReturn(false);
 
@@ -116,7 +118,7 @@ class EmailControllerTest {
 
     @Test
     void givenInvalidEmailAddress_whenVerstuurEmailSmtp_thenReturnBadRequest() {
-        ResponseEntity<String> expected = ResponseEntity.badRequest().build();
+        ResponseEntity<String> expected = ResponseEntity.badRequest().body(ONGELDIG_EMAILADRES);
         VerstuurEmailRequestDto dto = aVerstuurEmailRequest().build();
         when(emailValidator.isValid(dto.getGeadresseerdeEmail())).thenReturn(false);
 

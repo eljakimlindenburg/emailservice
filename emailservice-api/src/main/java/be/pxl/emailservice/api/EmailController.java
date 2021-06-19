@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class EmailController {
 
     private static final Logger LOGGER = getLogger(EmailController.class);
-    private static final String ONGELDIG_EMAILADRES = "FOUTIEF_EMAILADRES";
+    private static final String ONGELDIG_EMAILADRES = "ONGELDIG_EMAILADRES";
 
     private final EmailValidator emailValidator;
     private final EmailService emailService;
