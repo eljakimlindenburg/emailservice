@@ -8,13 +8,15 @@ import be.pxl.emailservice.api.dto.VerstuurEmailRequestDto;
 import be.pxl.emailservice.core.api.EmailDto;
 import be.pxl.emailservice.core.api.Provider;
 import be.pxl.emailservice.core.api.Status;
-import be.pxl.emailservice.test.infrastructure.util.UnitTest;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
+import org.mockito.junit.jupiter.MockitoExtension;
 
-class EmailMapperTest implements UnitTest {
+@ExtendWith(MockitoExtension.class)
+class EmailMapperTest {
 
     @InjectMocks
     private EmailMapper emailMapper;

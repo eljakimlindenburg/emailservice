@@ -51,18 +51,11 @@
             <groupId>be.pxl.emailservice</groupId>
             <artifactId>emailservice-sparkpost-adapter</artifactId>
         </dependency>
-        <dependency>
-            <groupId>be.pxl.emailservice</groupId>
-            <artifactId>emailservice-test-infrastructure</artifactId>
-            <scope>test</scope>
-        </dependency>
 
         <!-- spring -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-tomcat</artifactId>
-            <!-- provided scope om te vermijden dat tomcat classes mee worden genomen in de app file -->
-            <scope>provided</scope>
         </dependency>
     </dependencies>
 

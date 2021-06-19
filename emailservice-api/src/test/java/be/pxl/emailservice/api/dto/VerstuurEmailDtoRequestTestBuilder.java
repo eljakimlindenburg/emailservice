@@ -1,6 +1,6 @@
 package be.pxl.emailservice.api.dto;
 
-import be.pxl.emailservice.test.infrastructure.util.Whitebox;
+import be.pxl.emailservice.infrastructure.util.Whitebox;
 
 public class VerstuurEmailDtoRequestTestBuilder {
 

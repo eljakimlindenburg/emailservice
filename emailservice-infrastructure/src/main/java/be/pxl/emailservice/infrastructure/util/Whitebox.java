@@ -1,4 +1,4 @@
-package be.pxl.emailservice.test.infrastructure.util;
+package be.pxl.emailservice.infrastructure.util;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
@@ -6,11 +6,11 @@ import java.lang.reflect.InvocationTargetException;
 
 @SuppressWarnings("squid:S3011")
 public class Whitebox {
-    
+
     private Whitebox() {
         throw new AssertionError("No instances of utility class");
     }
-    
+
     public static <T> T createInstance(Class<T> clazz) {
         try {
             Constructor<T> constructor = clazz.getDeclaredConstructor();
@@ -20,7 +20,7 @@ public class Whitebox {
             throw new WhiteboxException("Failed to create instance with no-arg constructor", e);
         }
     }
-    
+
     public static void setInternalState(Object target, String field, Object value) {
         Class<?> c = target.getClass();
         try {
@@ -31,7 +31,7 @@ public class Whitebox {
             throw new WhiteboxException("Unable to set internal state on a private field. Please report to mockito mailing list.", e);
         }
     }
-    
+
     private static Field getFieldFromHierarchy(Class<?> clazz, String field) {
         var f = getField(clazz, field);
         while (f == null && clazz != Object.class) {
@@ -46,7 +46,7 @@ public class Whitebox {
         }
         return f;
     }
-    
+
     private static Field getField(Class<?> clazz, String field) {
         try {
             return clazz.getDeclaredField(field);
@@ -54,13 +54,13 @@ public class Whitebox {
             return null;
         }
     }
-    
+
     public static class WhiteboxException extends RuntimeException {
-        
+
         WhiteboxException(String message) {
             super(message);
         }
-        
+
         WhiteboxException(String message, Exception cause) {
             super(message, cause);
         }

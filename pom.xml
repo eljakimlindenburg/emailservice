@@ -23,12 +23,10 @@
         <module>emailservice-core</module>
 		<module>emailservice-core-api</module>
 		<module>emailservice-infrastructure</module>
-		<module>emailservice-integration-test</module>
 		<module>emailservice-report</module>
 		<module>emailservice-sendgrid-adapter</module>
 		<module>emailservice-smtp-adapter</module>
 		<module>emailservice-sparkpost-adapter</module>
-		<module>emailservice-test-infrastructure</module>
 		<module>emailservice-ui</module>
 	</modules>
 
@@ -36,7 +34,7 @@
 		<!-- instellingen -->
 		<java.version>11</java.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<start-class>Application</start-class>
+		<start-class>be.pxl.emailservice.Application</start-class>
 		<maven.build.timestamp.format>yyyy-MM-dd HH:mm:ss</maven.build.timestamp.format>
 		<skipUnittests>false</skipUnittests>
 		<skipIntegrationtests>false</skipIntegrationtests>
@@ -80,9 +78,15 @@
 			<dependency>
 				<groupId>be.pxl.emailservice</groupId>
 				<artifactId>emailservice-application</artifactId>
-                <classifier>classes</classifier>
 				<version>${project.version}</version>
 			</dependency>
+            <dependency>
+                <groupId>be.pxl.emailservice</groupId>
+                <artifactId>emailservice-application</artifactId>
+                <version>${project.version}</version>
+                <scope>test</scope>
+                <type>test-jar</type>
+            </dependency>
 			<dependency>
 				<groupId>be.pxl.emailservice</groupId>
 				<artifactId>emailservice-config</artifactId>
@@ -116,12 +120,6 @@
 				<groupId>be.pxl.emailservice</groupId>
 				<artifactId>emailservice-infrastructure</artifactId>
 				<version>${project.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>be.pxl.emailservice</groupId>
-				<artifactId>emailservice-integration-test</artifactId>
-				<version>${project.version}</version>
-				<scope>test</scope>
 			</dependency>
 			<dependency>
 				<groupId>be.pxl.emailservice</groupId>
@@ -163,12 +161,6 @@
 				<version>${project.version}</version>
 				<scope>test</scope>
 				<type>test-jar</type>
-			</dependency>
-			<dependency>
-				<groupId>be.pxl.emailservice</groupId>
-				<artifactId>emailservice-test-infrastructure</artifactId>
-				<version>${project.version}</version>
-				<scope>test</scope>
 			</dependency>
 			<dependency>
 				<groupId>be.pxl.emailservice</groupId>
@@ -238,16 +230,6 @@
 	<build>
 		<pluginManagement>
 			<plugins>
-				<plugin>
-					<artifactId>maven-resources-plugin</artifactId>
-					<configuration>
-						<delimiters>
-							<delimiter>@</delimiter>
-						</delimiters>
-						<escapeString>\</escapeString>
-						<useDefaultDelimiters>false</useDefaultDelimiters>
-					</configuration>
-				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-jar-plugin</artifactId>

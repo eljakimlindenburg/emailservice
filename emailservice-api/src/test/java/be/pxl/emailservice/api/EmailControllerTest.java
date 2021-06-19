@@ -11,15 +11,17 @@ import be.pxl.emailservice.api.dto.VerstuurEmailRequestDto;
 import be.pxl.emailservice.core.api.EmailDto;
 import be.pxl.emailservice.core.api.Provider;
 import be.pxl.emailservice.core.api.service.EmailService;
-import be.pxl.emailservice.test.infrastructure.util.UnitTest;
 import org.apache.commons.validator.routines.EmailValidator;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.ResponseEntity;
 
-class EmailControllerTest implements UnitTest {
+@ExtendWith(MockitoExtension.class)
+class EmailControllerTest {
 
     @Mock
     private EmailValidator emailValidator;

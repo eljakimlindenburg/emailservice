@@ -25,8 +25,7 @@
         </dependency>
         <dependency>
             <groupId>be.pxl.emailservice</groupId>
-            <artifactId>emailservice-test-infrastructure</artifactId>
-            <scope>test</scope>
+            <artifactId>emailservice-infrastructure</artifactId>
         </dependency>
 
         <!-- spring -->

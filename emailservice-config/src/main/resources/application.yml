@@ -18,3 +18,9 @@ email:
         verified.emailaddress.from: eljakim.lindenburg@student.pxl.be
 
 application.url: https://webhook.site/7d2a0c9b-0778-48f7-968d-a16e9d1ae73f
+
+management:
+    endpoint.health.show-details: always
+    endpoints.web:
+        base-path: /
+        exposure.include: info, health

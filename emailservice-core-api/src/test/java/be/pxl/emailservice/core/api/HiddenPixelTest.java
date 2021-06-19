@@ -2,11 +2,10 @@ package be.pxl.emailservice.core.api;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import be.pxl.emailservice.test.infrastructure.util.UnitTest;
 import java.util.UUID;
 import org.junit.jupiter.api.Test;
 
-class HiddelPixelTest implements UnitTest {
+class HiddenPixelTest {
 
     @Test
     void givenParameters_whenFrom_thenReturnCorrectPixel() {
