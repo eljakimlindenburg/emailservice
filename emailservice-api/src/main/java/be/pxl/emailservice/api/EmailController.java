@@ -3,7 +3,6 @@ package be.pxl.emailservice.api;
 import static org.slf4j.LoggerFactory.getLogger;
 
 import be.pxl.emailservice.api.dto.VerstuurEmailRequestDto;
-import be.pxl.emailservice.config.ApplicationProperties;
 import be.pxl.emailservice.core.api.Provider;
 import be.pxl.emailservice.core.api.service.EmailService;
 import java.util.UUID;
@@ -35,7 +34,6 @@ public class EmailController {
 
     @GetMapping(value = "/{uuid}")
     public void notificeerEmailGeopend(@PathVariable UUID uuid) {
-        LOGGER.info("Geopend notificatie ontvangen van {}", uuid);
         emailService.updateEmailGeopend(uuid);
     }
 
@@ -59,12 +57,12 @@ public class EmailController {
         return ResponseEntity.ok().build();
     }
 
-    @PostMapping(path = "/verstuur/sparkpost")
-    public ResponseEntity<String> verstuurEmailViaSparkPost(VerstuurEmailRequestDto dto) {
+    @PostMapping(path = "/mailgun/email/verstuur")
+    public ResponseEntity<String> verstuurEmailViaMailgun(VerstuurEmailRequestDto dto) {
         if (!emailValidator.isValid(dto.getGeadresseerdeEmail())) {
             return ResponseEntity.badRequest().build();
         }
-        emailService.verstuurEmail(emailMapper.map(Provider.SPARKPOST, dto));
+        emailService.verstuurEmail(emailMapper.map(Provider.MAILGUN, dto));
         return ResponseEntity.ok().build();
     }
 

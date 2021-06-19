@@ -39,10 +39,10 @@ class EmailMapperTest {
     @Test
     void givenProviderSparkPost_whenMap_thenReturnCorrectEmail() {
         VerstuurEmailRequestDto dto = aVerstuurEmailRequest().build();
-        EmailDto emailDto = emailMapper.map(Provider.SPARKPOST, dto);
+        EmailDto emailDto = emailMapper.map(Provider.MAILGUN, dto);
 
         assertNotNull(emailDto.getCorrelatieUuid());
-        assertThat(emailDto.getProvider()).isEqualTo(Provider.SPARKPOST);
+        assertThat(emailDto.getProvider()).isEqualTo(Provider.MAILGUN);
         assertThat(emailDto.getStatus()).isEqualTo(Status.INITIEEL);
         assertThat(emailDto.getGeadresseerdeEmail()).isEqualTo(dto.getGeadresseerdeEmail());
         assertThat(emailDto.getGeadresseerdeNaam()).isEqualTo(dto.getGeadresseerdeNaam());

@@ -79,14 +79,14 @@ class EmailControllerTest {
         ResponseEntity<String> expected = ResponseEntity.ok().build();
         VerstuurEmailRequestDto dto = aVerstuurEmailRequest().build();
         when(emailValidator.isValid(dto.getGeadresseerdeEmail())).thenReturn(true);
-        EmailDto emailDto = anEmail().provider(Provider.SPARKPOST).build();
-        when(emailMapper.map(Provider.SPARKPOST, dto)).thenReturn(emailDto);
+        EmailDto emailDto = anEmail().provider(Provider.MAILGUN).build();
+        when(emailMapper.map(Provider.MAILGUN, dto)).thenReturn(emailDto);
 
-        ResponseEntity<String> actual = emailController.verstuurEmailViaSparkPost(dto);
+        ResponseEntity<String> actual = emailController.verstuurEmailViaMailgun(dto);
 
         assertEquals(expected, actual);
         verify(emailValidator).isValid(dto.getGeadresseerdeEmail());
-        verify(emailMapper).map(Provider.SPARKPOST, dto);
+        verify(emailMapper).map(Provider.MAILGUN, dto);
         verify(emailService).verstuurEmail(emailDto);
     }
 
@@ -108,7 +108,7 @@ class EmailControllerTest {
         VerstuurEmailRequestDto dto = aVerstuurEmailRequest().build();
         when(emailValidator.isValid(dto.getGeadresseerdeEmail())).thenReturn(false);
 
-        ResponseEntity<String> actual = emailController.verstuurEmailViaSparkPost(dto);
+        ResponseEntity<String> actual = emailController.verstuurEmailViaMailgun(dto);
 
         assertEquals(expected, actual);
         verify(emailValidator).isValid(dto.getGeadresseerdeEmail());

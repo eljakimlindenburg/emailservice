@@ -4,5 +4,5 @@ public enum Provider {
 
     EIGEN_API,
     SENDGRID,
-    SPARKPOST
+    MAILGUN
 }

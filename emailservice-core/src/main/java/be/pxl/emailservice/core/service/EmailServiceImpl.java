@@ -42,7 +42,7 @@ public class EmailServiceImpl implements EmailService {
         if (Provider.SENDGRID.equals(dto.getProvider())) {
             dto = sendGridService.verstuurEmail(dto);
         }
-        if (Provider.SPARKPOST.equals(dto.getProvider())) {
+        if (Provider.MAILGUN.equals(dto.getProvider())) {
             sparkPostService.verstuurEmail(dto);
         }
         email.setStatus(dto.getStatus());

@@ -8,7 +8,7 @@ public class IndexController {
 
     @GetMapping("/")
     public String index() {
-        return "index.html";
+        return "Emailservice is up and running voor het juryexamen.";
     }
 
 }
