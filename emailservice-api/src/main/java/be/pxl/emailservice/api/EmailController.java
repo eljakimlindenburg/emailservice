@@ -3,6 +3,7 @@ package be.pxl.emailservice.api;
 import static org.slf4j.LoggerFactory.getLogger;
 
 import be.pxl.emailservice.api.dto.VerstuurEmailRequestDto;
+import be.pxl.emailservice.config.ApplicationProperties;
 import be.pxl.emailservice.core.api.Provider;
 import be.pxl.emailservice.core.api.service.EmailService;
 import java.util.UUID;
@@ -22,11 +23,13 @@ public class EmailController {
 
     private static final Logger LOGGER = getLogger(EmailController.class);
 
+    private final ApplicationProperties properties;
     private final EmailValidator emailValidator;
     private final EmailService emailService;
     private final EmailMapper emailMapper;
 
-    public EmailController(EmailService emailService, EmailMapper emailMapper, EmailValidator emailValidator) {
+    public EmailController(ApplicationProperties properties, EmailService emailService, EmailMapper emailMapper, EmailValidator emailValidator) {
+        this.properties = properties;
         this.emailService = emailService;
         this.emailMapper = emailMapper;
         this.emailValidator = emailValidator;
@@ -34,7 +37,7 @@ public class EmailController {
 
     @GetMapping
     public String hello() {
-        return "Hello from Azure cloud";
+        return String.format("Hello from Azure cloud /n %s /n %s", properties.getSendGridApiKey(), properties.getVerifiedSendGridEmailaddress());
     }
 
     @GetMapping(value = "/{uuid}")

@@ -14,8 +14,8 @@ spring:
 
 email:
     sendgrid:
-        apiKey: removed
-        verified.emailaddress.from: eljakim.lindenburg@student.pxl.be
+        apiKey: ${SENDGRID_APIKEY}
+        verified.emailaddress.from: ${VERIFIED_EMAILADDRESS}
 
 application.url: https://webhook.site/7d2a0c9b-0778-48f7-968d-a16e9d1ae73f
 
