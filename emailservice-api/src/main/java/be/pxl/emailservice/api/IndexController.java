@@ -1,16 +1,16 @@
 package be.pxl.emailservice.api;
 
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
-@RestController
-@RequestMapping("/")
+@Controller
+@RequestMapping(path = "/")
 public class IndexController {
 
     @GetMapping
     public String index() {
-        return "Emailservice is up and running voor het juryexamen.";
+        return "index.html";
     }
 
 }

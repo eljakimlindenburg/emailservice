@@ -60,6 +60,7 @@ public class EmailController {
     @PostMapping(path = "/mailgun/email/verstuur")
     public ResponseEntity<String> verstuurEmailViaMailgun(VerstuurEmailRequestDto dto) {
         if (!emailValidator.isValid(dto.getGeadresseerdeEmail())) {
+            LOGGER.info("Foutief emailadres");
             return ResponseEntity.badRequest().build();
         }
         emailService.verstuurEmail(emailMapper.map(Provider.MAILGUN, dto));

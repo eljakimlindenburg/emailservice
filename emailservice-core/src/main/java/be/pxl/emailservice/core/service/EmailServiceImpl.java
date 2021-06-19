@@ -8,7 +8,7 @@ import be.pxl.emailservice.core.api.Status;
 import be.pxl.emailservice.core.api.service.EmailService;
 import be.pxl.emailservice.core.api.service.SendGridService;
 import be.pxl.emailservice.core.api.service.SmtpService;
-import be.pxl.emailservice.core.api.service.SparkPostService;
+import be.pxl.emailservice.core.api.service.MailgunService;
 import be.pxl.emailservice.core.service.repository.EmailEntity;
 import be.pxl.emailservice.core.service.repository.EmailEntityRepository;
 import java.time.Instant;
@@ -23,13 +23,13 @@ public class EmailServiceImpl implements EmailService {
 
     private final SmtpService smtpService;
     private final SendGridService sendGridService;
-    private final SparkPostService sparkPostService;
+    private final MailgunService mailgunService;
     private final EmailEntityRepository emailRepository;
 
-    public EmailServiceImpl(SmtpService smtpService, SendGridService sendGridService, SparkPostService sparkPostService, EmailEntityRepository emailRepository) {
+    public EmailServiceImpl(SmtpService smtpService, SendGridService sendGridService, MailgunService mailgunService, EmailEntityRepository emailRepository) {
         this.smtpService = smtpService;
         this.sendGridService = sendGridService;
-        this.sparkPostService = sparkPostService;
+        this.mailgunService = mailgunService;
         this.emailRepository = emailRepository;
     }
 
@@ -43,7 +43,7 @@ public class EmailServiceImpl implements EmailService {
             dto = sendGridService.verstuurEmail(dto);
         }
         if (Provider.MAILGUN.equals(dto.getProvider())) {
-            sparkPostService.verstuurEmail(dto);
+            mailgunService.verstuurEmail(dto);
         }
         email.setStatus(dto.getStatus());
         LOGGER.info("status gewijzigd naar {}", email.getStatus());
