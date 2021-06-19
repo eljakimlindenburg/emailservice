@@ -17,7 +17,7 @@ email:
         apiKey: ${SENDGRID_APIKEY}
         verified.emailaddress.from: ${VERIFIED_EMAILADDRESS}
 
-application.url: https://webhook.site/7d2a0c9b-0778-48f7-968d-a16e9d1ae73f
+application.url: http://emailservice-app.azurewebsites.net/
 
 management:
     endpoint.health.show-details: always

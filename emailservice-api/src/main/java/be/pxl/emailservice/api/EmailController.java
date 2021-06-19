@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class EmailController {
 
     private static final Logger LOGGER = getLogger(EmailController.class);
+    private static final String ONGELDIG_EMAILADRES = "FOUTIEF_EMAILADRES";
 
     private final EmailValidator emailValidator;
     private final EmailService emailService;
@@ -34,13 +35,15 @@ public class EmailController {
 
     @GetMapping(value = "/{uuid}")
     public void notificeerEmailGeopend(@PathVariable UUID uuid) {
+        LOGGER.info("Geopend notificatie ontvangen voor {}", uuid);
         emailService.updateEmailGeopend(uuid);
     }
 
     @PostMapping("/verstuur/stmp")
     public ResponseEntity<String> verstuurEmailViaEigenSmtp(VerstuurEmailRequestDto dto) {
         if (!emailValidator.isValid(dto.getGeadresseerdeEmail())) {
-            return ResponseEntity.badRequest().build();
+            LOGGER.info(ONGELDIG_EMAILADRES);
+            return ResponseEntity.badRequest().body(ONGELDIG_EMAILADRES);
         }
         emailService.verstuurEmail(emailMapper.map(Provider.EIGEN_API, dto));
         return ResponseEntity.ok().build();
@@ -50,8 +53,8 @@ public class EmailController {
     public ResponseEntity<String> verstuurEmailViaSendGrid(@RequestBody VerstuurEmailRequestDto dto) {
         LOGGER.info("Request ontvangen");
         if (!emailValidator.isValid(dto.getGeadresseerdeEmail())) {
-            LOGGER.info("Foutief emailadres");
-            return ResponseEntity.badRequest().build();
+            LOGGER.info(ONGELDIG_EMAILADRES);
+            return ResponseEntity.badRequest().body(ONGELDIG_EMAILADRES);
         }
         emailService.verstuurEmail(emailMapper.map(Provider.SENDGRID, dto));
         return ResponseEntity.ok().build();
@@ -60,8 +63,8 @@ public class EmailController {
     @PostMapping(path = "/mailgun/email/verstuur")
     public ResponseEntity<String> verstuurEmailViaMailgun(VerstuurEmailRequestDto dto) {
         if (!emailValidator.isValid(dto.getGeadresseerdeEmail())) {
-            LOGGER.info("Foutief emailadres");
-            return ResponseEntity.badRequest().build();
+            LOGGER.info(ONGELDIG_EMAILADRES);
+            return ResponseEntity.badRequest().body(ONGELDIG_EMAILADRES);
         }
         emailService.verstuurEmail(emailMapper.map(Provider.MAILGUN, dto));
         return ResponseEntity.ok().build();
