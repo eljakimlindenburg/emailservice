@@ -26,8 +26,7 @@
 		<module>emailservice-report</module>
 		<module>emailservice-sendgrid-adapter</module>
 		<module>emailservice-smtp-adapter</module>
-		<module>emailservice-sparkpost-adapter</module>
-		<module>emailservice-ui</module>
+		<module>emailservice-mailgun-adapter</module>
 	</modules>
 
 	<properties>
@@ -41,13 +40,9 @@
 
 		<!-- versies -->
 		<spring-cloud.version>2020.0.2</spring-cloud.version>
-		<sparkpost.version>0.23</sparkpost.version>
 		<sendgrid.version>4.7.2</sendgrid.version>
 		<jacoco-maven-plugin.version>0.8.5</jacoco-maven-plugin.version>
 		<sonar-jacoco-listeners.version>5.14.0.18788</sonar-jacoco-listeners.version>
-		<node.version>v14.17.0</node.version>
-		<npm.version>7.14.0</npm.version>
-		<frontend-maven-plugin.version>1.12.0</frontend-maven-plugin.version>
         <apache-commons-validator.version>1.7</apache-commons-validator.version>
 
 		<!-- sonar -->
@@ -140,12 +135,12 @@
 			</dependency>
 			<dependency>
 				<groupId>be.pxl.emailservice</groupId>
-				<artifactId>emailservice-sparkpost-adapter</artifactId>
+				<artifactId>emailservice-mailgun-adapter</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>be.pxl.emailservice</groupId>
-				<artifactId>emailservice-sparkpost-adapter</artifactId>
+				<artifactId>emailservice-mailgun-adapter</artifactId>
 				<version>${project.version}</version>
 				<scope>test</scope>
 				<type>test-jar</type>
@@ -161,11 +156,6 @@
 				<version>${project.version}</version>
 				<scope>test</scope>
 				<type>test-jar</type>
-			</dependency>
-			<dependency>
-				<groupId>be.pxl.emailservice</groupId>
-				<artifactId>emailservice-ui</artifactId>
-				<version>${project.version}</version>
 			</dependency>
 
 			<!-- spring -->
@@ -192,12 +182,7 @@
 				<scope>test</scope>
 			</dependency>
 
-			<!-- sparkpost -->
-			<dependency>
-				<groupId>com.sparkpost</groupId>
-				<artifactId>sparkpost-lib</artifactId>
-				<version>${sparkpost.version}</version>
-			</dependency>
+			<!-- mailgun -->
 
 			<!-- sendgrid -->
 			<dependency>
@@ -311,16 +296,6 @@
 							</goals>
 						</execution>
 					</executions>
-				</plugin>
-				<plugin>
-					<groupId>com.github.eirslett</groupId>
-					<artifactId>frontend-maven-plugin</artifactId>
-					<version>${frontend-maven-plugin.version}</version>
-					<configuration>
-						<installDirectory>${maven.multiModuleProjectDirectory}</installDirectory>
-						<nodeVersion>${node.version}</nodeVersion>
-						<npmVersion>${npm.version}</npmVersion>
-					</configuration>
 				</plugin>
 			</plugins>
 		</pluginManagement>
