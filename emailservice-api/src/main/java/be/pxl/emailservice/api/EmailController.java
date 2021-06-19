@@ -6,7 +6,6 @@ import be.pxl.emailservice.api.dto.VerstuurEmailRequestDto;
 import be.pxl.emailservice.core.api.Provider;
 import be.pxl.emailservice.core.api.service.EmailService;
 import java.util.UUID;
-import org.apache.commons.validator.routines.EmailValidator;
 import org.slf4j.Logger;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,16 +20,13 @@ import org.springframework.web.bind.annotation.RestController;
 public class EmailController {
 
     private static final Logger LOGGER = getLogger(EmailController.class);
-    private static final String ONGELDIG_EMAILADRES = "ONGELDIG_EMAILADRES";
 
-    private final EmailValidator emailValidator;
     private final EmailService emailService;
     private final EmailMapper emailMapper;
 
-    public EmailController(EmailService emailService, EmailMapper emailMapper, EmailValidator emailValidator) {
+    public EmailController(EmailService emailService, EmailMapper emailMapper) {
         this.emailService = emailService;
         this.emailMapper = emailMapper;
-        this.emailValidator = emailValidator;
     }
 
     @GetMapping(value = "/{uuid}")
@@ -41,10 +37,6 @@ public class EmailController {
 
     @PostMapping("/verstuur/stmp")
     public ResponseEntity<String> verstuurEmailViaEigenSmtp(VerstuurEmailRequestDto dto) {
-        if (!emailValidator.isValid(dto.getGeadresseerdeEmail())) {
-            LOGGER.info(ONGELDIG_EMAILADRES);
-            return ResponseEntity.badRequest().body(ONGELDIG_EMAILADRES);
-        }
         emailService.verstuurEmail(emailMapper.map(Provider.EIGEN_API, dto));
         return ResponseEntity.ok().build();
     }
@@ -52,20 +44,12 @@ public class EmailController {
     @PostMapping(path = "/sendgrid/email/verstuur")
     public ResponseEntity<String> verstuurEmailViaSendGrid(@RequestBody VerstuurEmailRequestDto dto) {
         LOGGER.info("Request ontvangen");
-        if (!emailValidator.isValid(dto.getGeadresseerdeEmail())) {
-            LOGGER.info(ONGELDIG_EMAILADRES);
-            return ResponseEntity.badRequest().body(ONGELDIG_EMAILADRES);
-        }
         emailService.verstuurEmail(emailMapper.map(Provider.SENDGRID, dto));
         return ResponseEntity.ok().build();
     }
 
     @PostMapping(path = "/mailgun/email/verstuur")
     public ResponseEntity<String> verstuurEmailViaMailgun(VerstuurEmailRequestDto dto) {
-        if (!emailValidator.isValid(dto.getGeadresseerdeEmail())) {
-            LOGGER.info(ONGELDIG_EMAILADRES);
-            return ResponseEntity.badRequest().body(ONGELDIG_EMAILADRES);
-        }
         emailService.verstuurEmail(emailMapper.map(Provider.MAILGUN, dto));
         return ResponseEntity.ok().build();
     }
