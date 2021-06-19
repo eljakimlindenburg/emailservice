@@ -15,8 +15,8 @@ jobs:
           fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
       - name: Set up JDK 11
         env: 
-          SENDGRID_APIKEY:${{ secrets.SENDGRID_APIKEY }}
-          VERIFIED_EMAILADDRESS:${{ secrets.VERIFIED_EMAILADDRESS }}
+          SENDGRID_APIKEY: ${{ secrets.SENDGRID_APIKEY }}
+          VERIFIED_EMAILADDRESS: ${{ secrets.VERIFIED_EMAILADDRESS }}
         uses: actions/setup-java@v1
         with:
           java-version: 11
