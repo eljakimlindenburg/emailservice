@@ -14,7 +14,7 @@ spring:
 
 email:
     sendgrid:
-        apiKey: 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
+        apiKey: removed
         verified.emailaddress.from: eljakim.lindenburg@student.pxl.be
 
 application.url: https://webhook.site/7d2a0c9b-0778-48f7-968d-a16e9d1ae73f
