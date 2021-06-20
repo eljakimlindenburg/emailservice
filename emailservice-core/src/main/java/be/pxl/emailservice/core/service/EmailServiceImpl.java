@@ -43,7 +43,7 @@ public class EmailServiceImpl implements EmailService {
             dto = sendGridService.verstuurEmail(dto);
         }
         if (Provider.MAILGUN.equals(dto.getProvider())) {
-            mailgunService.verstuurEmail(dto);
+            dto = mailgunService.verstuurEmail(dto);
         }
         email.setStatus(dto.getStatus());
         LOGGER.info("status gewijzigd naar {}", email.getStatus());

@@ -4,5 +4,5 @@ import be.pxl.emailservice.core.api.EmailDto;
 
 public interface MailgunService {
 
-    void verstuurEmail(EmailDto emailDto);
+    EmailDto verstuurEmail(EmailDto emailDto);
 }

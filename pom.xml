@@ -41,6 +41,7 @@
 		<!-- versies -->
 		<spring-cloud.version>2020.0.2</spring-cloud.version>
 		<sendgrid.version>4.7.2</sendgrid.version>
+        <mashape.version>1.4.9</mashape.version>
 		<jacoco-maven-plugin.version>0.8.5</jacoco-maven-plugin.version>
 		<sonar-jacoco-listeners.version>5.14.0.18788</sonar-jacoco-listeners.version>
         <apache-commons-validator.version>1.7</apache-commons-validator.version>
@@ -183,6 +184,11 @@
 			</dependency>
 
 			<!-- mailgun -->
+            <dependency>
+                <groupId>com.mashape.unirest</groupId>
+                <artifactId>unirest-java</artifactId>
+                <version>${mashape.version}</version>
+            </dependency>
 
 			<!-- sendgrid -->
 			<dependency>
