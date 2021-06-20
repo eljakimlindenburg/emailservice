@@ -16,4 +16,4 @@ CREATE TABLE EMAIL_QM (
 );
 
 INSERT INTO EMAIL_QM (CORRELATIE_UUID, PROVIDER, STATUS, CREATIE_TIMESTAMP, LAATSTE_UPDATE_TIMESTAMP, AFZENDER, GEADRESSEERDE_EMAIL, GEADRESSEERDE_NAAM, INHOUD, ONDERWERP) VALUES
-  ('aa35cc12-e53f-4ecc-9415-692443de5413', 'SENDGRID', 'INITIEEL', '2017-02-03T10:37:30.00Z', '2017-02-03T10:37:30.00Z', 'eljakim.lindenburg@student.pxl.be', 'eljakim.l@gmail.com', 'Eljakim Lindenburg', 'testInhoud', 'testOnderwerp');
+  ('aa35cc12-e53f-4ecc-9415-692443de5413', 'SENDGRID', 'INITIEEL', '2017-02-03T10:37:30.00Z', '2017-02-03T10:37:30.00Z', 'test@student.pxl.be', 'test@test.be', 'Test de tester', 'testInhoud', 'testOnderwerp');
