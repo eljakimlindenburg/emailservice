@@ -40,12 +40,16 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SENDGRID_APIKEY: ${{ secrets.SENDGRID_APIKEY }}
           VERIFIED_EMAILADDRESS: ${{ secrets.VERIFIED_EMAILADDRESS }}
+          DB_USERNAME: ${{ secrets.DB_USERNAME }}
+          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
         run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar
         
       - name: Create Jar with Maven
         env: 
             SENDGRID_APIKEY: ${{ secrets.SENDGRID_APIKEY }}
             VERIFIED_EMAILADDRESS: ${{ secrets.VERIFIED_EMAILADDRESS }}
+            DB_USERNAME: ${{ secrets.DB_USERNAME }}
+            DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
         run: mvn clean install -DskipUnittests=true -DskipIntegrationtests=true
 
       - name: Upload artifact for deployment job
