@@ -73,11 +73,11 @@ public class EmailServiceImpl implements EmailService {
 
     private EmailEntity findOrElseBuildNew(EmailDto dto) {
         return emailRepository.findByCorrelatieUuid(dto.getCorrelatieUuid()).orElse(EmailEntity.builder()
-            .correlatieUuid(UUID.randomUUID())
+            .correlatieUuid(dto.getCorrelatieUuid())
             .status(Status.INITIEEL)
             .provider(dto.getProvider())
-            .creatieTimestamp(Instant.now())
-            .laatsteUpdateTimestamp(Instant.now())
+            .creatieTimestamp(dto.getCreatieTimestamp())
+            .laatsteUpdateTimestamp(dto.getLaatsteUpdateTimestamp())
             .afzender(dto.getAfzender())
             .geadresseerdeEmail(dto.getGeadresseerdeEmail())
             .geadresseerdeNaam(dto.getGeadresseerdeNaam())
