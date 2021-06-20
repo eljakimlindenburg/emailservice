@@ -26,7 +26,7 @@ public class MailgunWebhookController {
     @PostMapping(path = "/webhook")
     public void processBounce(@RequestBody WebhookDto dto) {
         LOGGER.info("webhook event ontvangen: {}", dto);
-        if (dto.getEvent().equalsIgnoreCase(FAILED)) {
+        if (dto.getEvent() != null && dto.getRecipient() != null && dto.getEvent().equalsIgnoreCase(FAILED)) {
             emailService.verwerkBounce(dto.getRecipient());
         }
     }
