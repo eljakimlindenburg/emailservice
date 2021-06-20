@@ -66,7 +66,7 @@ class EmailControllerTest {
     }
 
     @Test
-    void givenValidDto_whenVerstuurEmailMailgun_thenVerstuurEmailUsingSparkPost_andReturnOk() {
+    void givenValidDto_whenVerstuurEmailMailgun_thenVerstuurEmailUsingMailgun_andReturnOk() {
         ResponseEntity<String> expected = ResponseEntity.ok().build();
         VerstuurEmailRequestDto dto = aVerstuurEmailRequest().build();
         EmailDto emailDto = anEmail().provider(Provider.MAILGUN).build();

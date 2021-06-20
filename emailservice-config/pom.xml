@@ -11,6 +11,12 @@
 
 	<artifactId>emailservice-config</artifactId>
 
+    <properties>
+        <sonar.coverage.exclusions>
+            **/*.java <!-- this module only contains the project configuration -->
+        </sonar.coverage.exclusions>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>org.springframework</groupId>

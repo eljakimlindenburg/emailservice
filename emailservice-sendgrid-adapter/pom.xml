@@ -11,6 +11,12 @@
 
     <artifactId>emailservice-sendgrid-adapter</artifactId>
 
+    <properties>
+        <sonar.coverage.exclusions>
+            **/*.java <!-- tests will be written later -->
+        </sonar.coverage.exclusions>
+    </properties>
+
     <dependencies>
         <!-- modules -->
         <dependency>

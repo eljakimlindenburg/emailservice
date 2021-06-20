@@ -11,6 +11,12 @@
 
     <artifactId>emailservice-smtp-adapter</artifactId>
 
+    <properties>
+        <sonar.coverage.exclusions>
+            **/*.java <!-- this module is currently not used, but will be used in the future -->
+        </sonar.coverage.exclusions>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>org.springframework</groupId>

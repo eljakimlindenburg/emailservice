@@ -11,6 +11,12 @@
 
     <artifactId>emailservice-mailgun-adapter</artifactId>
 
+    <properties>
+        <sonar.coverage.exclusions>
+            **/*.java <!-- tests will be written later -->
+        </sonar.coverage.exclusions>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>be.pxl.emailservice</groupId>

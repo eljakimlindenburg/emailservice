@@ -22,7 +22,7 @@ class EmailMapperTest {
     private EmailMapper emailMapper;
 
     @Test
-    void givenProviderSendGrid_whenMap_thenReturnCorrectEmail() {
+    void givenProviderSendGrid_whenMap_thenReturnCorrectEmailDto() {
         VerstuurEmailRequestDto dto = aVerstuurEmailRequest().build();
         EmailDto emailDto = emailMapper.map(Provider.SENDGRID, dto);
 
@@ -37,7 +37,7 @@ class EmailMapperTest {
     }
 
     @Test
-    void givenProviderSparkPost_whenMap_thenReturnCorrectEmail() {
+    void givenProviderMailgun_whenMap_thenReturnCorrectEmailDto() {
         VerstuurEmailRequestDto dto = aVerstuurEmailRequest().build();
         EmailDto emailDto = emailMapper.map(Provider.MAILGUN, dto);
 
@@ -52,7 +52,7 @@ class EmailMapperTest {
     }
 
     @Test
-    void givenProviderEigenApi_whenMap_thenReturnCorrectEmail() {
+    void givenProviderEigenApi_whenMap_thenReturnCorrectEmailDto() {
         VerstuurEmailRequestDto dto = aVerstuurEmailRequest().build();
         EmailDto emailDto = emailMapper.map(Provider.EIGEN_API, dto);
 

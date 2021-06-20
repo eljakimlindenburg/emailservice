@@ -11,6 +11,13 @@
 
     <artifactId>emailservice-infrastructure</artifactId>
 
+    <properties>
+        <sonar.coverage.exclusions>
+            **/Generics.java,               <!-- utility class, not picked up by sonar -->
+            **/Whitebox.java                <!-- utility class, not picked up by sonar -->
+        </sonar.coverage.exclusions>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>

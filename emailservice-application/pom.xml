@@ -13,7 +13,7 @@
 
     <properties>
         <sonar.coverage.exclusions>
-        **/Application.java                <!-- part of application startup, not picked up by sonar -->
+            **/*.java <!-- this module only contains the project startup class and bean configuration -->
         </sonar.coverage.exclusions>
     </properties>
 
