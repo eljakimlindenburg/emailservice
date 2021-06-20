@@ -1,4 +1,4 @@
-package be.pxl.emailservice;
+package be.pxl.emailservice.mailgun;
 
 import static org.slf4j.LoggerFactory.getLogger;
 

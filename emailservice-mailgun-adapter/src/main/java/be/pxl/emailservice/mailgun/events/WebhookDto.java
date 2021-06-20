@@ -1,4 +1,4 @@
-package be.pxl.emailservice.events;
+package be.pxl.emailservice.mailgun.events;
 
 import be.pxl.emailservice.core.api.util.EqualsByStateObject;
 

@@ -1,10 +1,9 @@
-package be.pxl.emailservice;
+package be.pxl.emailservice.mailgun;
 
 import static org.slf4j.LoggerFactory.getLogger;
 
 import be.pxl.emailservice.core.api.service.EmailService;
-import be.pxl.emailservice.events.WebhookDto;
-import java.util.List;
+import be.pxl.emailservice.mailgun.events.WebhookDto;
 import org.slf4j.Logger;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -25,13 +24,10 @@ public class MailgunWebhookController {
     }
 
     @PostMapping(path = "/webhook")
-    public void processBounce(@RequestBody List<WebhookDto> dtos) {
-        LOGGER.info("webhook event ontvangen: {}", dtos);
-        dtos.forEach(d -> {
-            if (d.getEvent().equalsIgnoreCase(FAILED)) {
-                emailService.verwerkBounce(d.getRecipient());
-            }
-        });
+    public void processBounce(@RequestBody WebhookDto dto) {
+        LOGGER.info("webhook event ontvangen: {}", dto);
+        if (dto.getEvent().equalsIgnoreCase(FAILED)) {
+            emailService.verwerkBounce(dto.getRecipient());
+        }
     }
-
 }
