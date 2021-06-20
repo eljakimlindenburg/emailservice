@@ -77,6 +77,14 @@ public class EmailEntity extends EqualsByStateObject {
         return status;
     }
 
+    public String getAfzender() {
+        return afzender;
+    }
+
+    public String getGeadresseerdeEmail() {
+        return geadresseerdeEmail;
+    }
+
     public void setStatus(Status status) {
         this.status = status;
     }
@@ -91,14 +99,6 @@ public class EmailEntity extends EqualsByStateObject {
 
     public void setLaatsteUpdateTimestamp(Instant laatsteUpdateTimestamp) {
         this.laatsteUpdateTimestamp = laatsteUpdateTimestamp;
-    }
-
-    public String getAfzender() {
-        return afzender;
-    }
-
-    public String getGeadresseerdeEmail() {
-        return geadresseerdeEmail;
     }
 
     public String getGeadresseerdeNaam() {

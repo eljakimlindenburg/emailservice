@@ -10,4 +10,5 @@ public interface EmailEntityRepository extends JpaRepository<EmailEntity, Long> 
 
     Optional<EmailEntity> findByCorrelatieUuid(UUID uuid);
 
+    Optional<EmailEntity> findFirstByGeadresseerdeEmailOrderByLaatsteUpdateTimestampDesc(String emailadres);
 }

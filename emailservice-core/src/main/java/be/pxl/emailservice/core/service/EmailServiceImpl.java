@@ -52,17 +52,23 @@ public class EmailServiceImpl implements EmailService {
     }
 
     @Override
-    public void updateEmail(EmailDto emailDto) {
-
+    public void verwerkBounce(String emailadres) {
+        var email = emailRepository.findFirstByGeadresseerdeEmailOrderByLaatsteUpdateTimestampDesc(emailadres);
+        email.ifPresent(e -> {
+            e.setStatus(Status.HARD_BOUNCE);
+            LOGGER.info("hard bounce geregistreerd");
+        });
     }
 
     @Override
-    public void updateEmailGeopend(UUID uuid) {
+    public void emailGeopend(UUID uuid) {
         var email = emailRepository.findByCorrelatieUuid(uuid);
-        email.ifPresent(e -> {
-            e.setStatus(Status.GEOPEND);
-            LOGGER.info("status gewijzigd naar {}", e.getStatus());
-        });
+        if (email.isPresent()) {
+            email.get().setStatus(Status.GEOPEND);
+            LOGGER.info("status gewijzigd naar {}", email.get().getStatus());
+        } else {
+            LOGGER.info("geen email gevonden voor correlatieUuid: {}", uuid);
+        }
     }
 
     private EmailEntity findOrElseBuildNew(EmailDto dto) {

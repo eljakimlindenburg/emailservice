@@ -2,6 +2,7 @@ package be.pxl.emailservice.api.dto;
 
 import be.pxl.emailservice.core.api.util.EqualsByStateObject;
 
+@SuppressWarnings("squid:S2160")
 public class VerstuurEmailRequestDto extends EqualsByStateObject {
 
     private String afzender;
@@ -9,6 +10,9 @@ public class VerstuurEmailRequestDto extends EqualsByStateObject {
     private String geadresseerdeNaam;
     private String inhoud;
     private String onderwerp;
+
+    private VerstuurEmailRequestDto() {
+    }
 
     public String getAfzender() {
         return afzender;

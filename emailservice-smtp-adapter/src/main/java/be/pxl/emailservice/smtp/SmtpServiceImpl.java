@@ -9,6 +9,6 @@ public class SmtpServiceImpl implements SmtpService {
 
     @Override
     public void verstuurEmail(EmailDto emailDto) {
-
+        throw new UnsupportedOperationException();
     }
 }

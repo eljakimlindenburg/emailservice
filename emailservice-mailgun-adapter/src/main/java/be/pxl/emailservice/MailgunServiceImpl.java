@@ -9,6 +9,6 @@ public class MailgunServiceImpl implements MailgunService {
 
     @Override
     public void verstuurEmail(EmailDto emailDto) {
-
+        throw new UnsupportedOperationException();
     }
 }

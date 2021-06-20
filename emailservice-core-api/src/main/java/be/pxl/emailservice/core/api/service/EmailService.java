@@ -7,7 +7,7 @@ public interface EmailService {
 
     void verstuurEmail(EmailDto dto);
 
-    void updateEmail(EmailDto dto);
+    void verwerkBounce(String email);
 
-    void updateEmailGeopend(UUID uuid);
+    void emailGeopend(UUID uuid);
 }

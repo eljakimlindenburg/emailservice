@@ -32,11 +32,11 @@ public class EmailController {
     @GetMapping(value = "/{uuid}")
     public void notificeerEmailGeopend(@PathVariable UUID uuid) {
         LOGGER.info("Geopend notificatie ontvangen voor {}", uuid);
-        emailService.updateEmailGeopend(uuid);
+        emailService.emailGeopend(uuid);
     }
 
     @PostMapping("/verstuur/stmp")
-    public ResponseEntity<String> verstuurEmailViaEigenSmtp(VerstuurEmailRequestDto dto) {
+    public ResponseEntity<String> verstuurEmailViaEigenSmtp(@RequestBody VerstuurEmailRequestDto dto) {
         emailService.verstuurEmail(emailMapper.map(Provider.EIGEN_API, dto));
         return ResponseEntity.ok().build();
     }
@@ -49,7 +49,8 @@ public class EmailController {
     }
 
     @PostMapping(path = "/mailgun/email/verstuur")
-    public ResponseEntity<String> verstuurEmailViaMailgun(VerstuurEmailRequestDto dto) {
+    public ResponseEntity<String> verstuurEmailViaMailgun(@RequestBody VerstuurEmailRequestDto dto) {
+        LOGGER.info("Request ontvangen");
         emailService.verstuurEmail(emailMapper.map(Provider.MAILGUN, dto));
         return ResponseEntity.ok().build();
     }

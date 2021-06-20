@@ -28,7 +28,7 @@ public class SendGridEmailRequestMapper {
     public Request mapToRequest(EmailDto dto) {
         var van = new Email(properties.getVerifiedSendGridEmailaddress(), dto.getAfzender());
         var naar = new Email(dto.getGeadresseerdeEmail(), dto.getGeadresseerdeNaam());
-        var inhoud = new Content("text/html", dto.getInhoud() + HiddenPixel.from(dto.getCorrelatieUuid(), properties.getApplicationUrl()));
+        var inhoud = new Content("text/html", String.format("%s %s", dto.getInhoud(), HiddenPixel.from(dto.getCorrelatieUuid(), properties.getApplicationUrl()).getPixel()));
         var mail = new Mail(van, dto.getOnderwerp(), naar, inhoud);
         var request = new Request();
         request.setMethod(Method.POST);
