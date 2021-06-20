@@ -56,6 +56,7 @@ public class EmailServiceImpl implements EmailService {
         var email = emailRepository.findFirstByGeadresseerdeEmailOrderByLaatsteUpdateTimestampDesc(emailadres);
         email.ifPresent(e -> {
             e.setStatus(Status.HARD_BOUNCE);
+            emailRepository.save(e);
             LOGGER.info("hard bounce geregistreerd");
         });
     }
@@ -63,10 +64,13 @@ public class EmailServiceImpl implements EmailService {
     @Override
     public void emailGeopend(UUID uuid) {
         var email = emailRepository.findByCorrelatieUuid(uuid);
-        if (email.isPresent()) {
-            email.get().setStatus(Status.GEOPEND);
-            LOGGER.info("status gewijzigd naar {}", email.get().getStatus());
-        } else {
+        if (email.isPresent() && !Status.GEOPEND.equals(email.get().getStatus())) {
+            var e = email.get();
+            e.setStatus(Status.GEOPEND);
+            emailRepository.save(e);
+            LOGGER.info("status gewijzigd naar {}", e.getStatus());
+        }
+        if (email.isEmpty()) {
             LOGGER.info("geen email gevonden voor correlatieUuid: {}", uuid);
         }
     }
